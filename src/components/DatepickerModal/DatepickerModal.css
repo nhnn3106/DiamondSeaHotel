@@ -1,0 +1,42 @@
+@import url('../../App.css');
+.datepopup-container {
+    position: relative;
+    display: inline-block;
+}
+.datepopup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    border: 1px solid black;
+    margin-left: -300px;
+    margin-top: 30px;
+    border-radius: 30px;
+    background-color: var(--bg-color-body--);
+}
+.datepopup__month {
+    margin: 15px 0px;
+}
+.datepopup__date_list {
+    /* width: 90%; */
+    height: 65%;
+    /* background-color: aqua; */
+}
+
+.day-cell {
+    /* border: 1px solid black;   */
+}
+.day-cell div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width:  40px;
+    height: 40px;
+    border-radius: 50%;    
+}
+.day-cell div:hover {
+    background-color: var(--bg-color-btn-hover--);
+}
