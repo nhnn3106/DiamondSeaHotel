@@ -26,7 +26,7 @@ const Header = () => {
           <div  className='verticalLine'></div>
           <Input labelName={"Nhập khách"} valueName={"Thêm khách"}/>
           <Button variant="danger" className='search-btn rounded-5'>
-          <IoIosSearch size={30}/>
+          <IoIosSearch size={20}/>
           </Button>
         </Container>
         <Container className="first-nav__right me-5 justify-content-end" >
