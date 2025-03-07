@@ -1,15 +1,16 @@
 import React from 'react'
-import Header from '../Header/Header'
-import RoomDisplay from '../RoomDisplay/RoomDisplay'
+import Header from '../components/Header/Header'
+import RoomDisplay from '../components/RoomDisplay/RoomDisplay'
+import Footer from '../components/Footer/Footer'
 
 const Home = () => {
   return (
-    <div>
-      <>
+    <>
       <Header/>
       <RoomDisplay/>
+      <Footer/>
     </>
-    </div>
+
   )
 }
 

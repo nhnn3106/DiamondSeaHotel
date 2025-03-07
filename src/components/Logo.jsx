@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react";
+import logo from "../assets/logoipsum-224.svg";
 
-import logo from '../assets/logoipsum-224.svg'
 const Logo = () => {
   return (
     <div className="logo">
-        <img src={logo} alt="" />
-        </div>
-  )
-}
+      <img src={logo} alt="Logo" />
+    </div>
+  );
+};
 
-export default Logo
+export default Logo;

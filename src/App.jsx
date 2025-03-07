@@ -1,13 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './Header/Header';
-import './App.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import Home from "./pages/Home";
 function App() {
-
-  
-
   return (
     <>
-      <Header/>
+      <Home />
     </>
   );
 }
