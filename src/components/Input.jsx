@@ -4,15 +4,11 @@ import DatepickerModal from "./DatepickerModal/DatepickerModal";
 const Input = (props) => {
   const [showDatepicker, setShowDatepicker] = useState(false);
 
-  const toggleDatepicker = () => {
-    setShowDatepicker(!showDatepicker);
-  };
-
   return (
-    <div className="d-flex flex-column" onClick={toggleDatepicker}>
+    <div className="d-flex flex-column">
       <span className="header__label">{props.labelName}</span>
       <span className="header__value">{props.valueName}</span>
-      {showDatepicker && <DatepickerModal />}
+      {props.isDateInput && showDatepicker && <DatepickerModal />}
     </div>
   );
 };
