@@ -1,85 +1,117 @@
-import React from "react";
-import { AiFillStar } from "react-icons/ai";
+import React, { useState } from "react";
+import { Card, Carousel } from "react-bootstrap";
+import { Heart } from "lucide-react"; // Sử dụng biểu tượng trái tim từ lucide-react
+import room1 from "../assets/roomImages/room-1.png";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+
 const RoomCard = () => {
-  const roomInfo = {
-    address: "Quận 7, Việt Nam",
-    numberBed: "8 giường",
-    rating: 4.84,
-    price: 5700000,
-    discount: 0.2,
-    image1: "src/assets/images/example1.avif",
-    image2: "src/assets/images/example2.avif",
-    image3: "src/assets/images/example3.avif",
-    image4: "src/assets/images/example4.avif",
-    image5: "src/assets/images/example5.avif",
+  // Số lượng hình ảnh trong Carousel (minh họa 3 hình ảnh)
+  const imageCount = 3;
+
+  // State để theo dõi trạng thái của trái tim
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  // Hàm xử lý khi ấn vào trái tim
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
   };
-  function formatPrice(price, locale = "vi-VN", currency = "VND") {
-    return new Intl.NumberFormat(locale, {
-      style: "currency",
-      currency: currency,
-    }).format(price);
-  }
 
   return (
-    <div className="" style={{ width: "500px", height: "300px" }}>
-      <div
-        id="carouselExampleAutoplaying"
-        className="carousel slide h-100 w-100"
-        data-bs-ride="carousel"
-      >
-        <div className="carousel-inner w-100 h-100">
-          <div className="carousel-item active w-100 h-100">
-            <img
-              src={roomInfo.image1}
-              className="d-block img-fluid w-100 h-100"
-              style={{ objectFit: "cover", objectPosition: "center" }}
-              alt="..."
-            />
-          </div>
-          <div className="carousel-item w-100 h-100">
-            <img
-              src={roomInfo.image2}
-              className="d-block img-fluid w-100 h-100"
-              style={{ objectFit: "cover", objectPosition: "center" }}
-              alt="..."
-            />
-          </div>
-          <div className="carousel-item w-100 h-100">
-            <img
-              src={roomInfo.image3}
-              className="d-block img-fluid w-100 h-100"
-              style={{ objectFit: "cover", objectPosition: "center" }}
-              alt="..."
-            />
-          </div>
-        </div>
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleAutoplaying"
-          data-bs-slide="prev"
+    <Card
+      style={{
+        width: "18rem",
+        borderRadius: "12px", // Bo góc 12px cho Card
+        overflow: "visible", // Đảm bảo không cắt xén các góc
+      }}
+      className="room-card border m-4"
+    >
+      {/* Carousel với biểu tượng trái tim */}
+      <div style={{ position: "relative", overflow: "visible" }}>
+        <Carousel
+          interval={null}
+          indicators={true}
+          controls={true}
+          className="custom-carousel"
+          style={{ borderRadius: "12px", overflow: "visible" }} // Đảm bảo Carousel không cắt xén
         >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleAutoplaying"
-          data-bs-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+          {Array.from({ length: imageCount }).map((_, index) => (
+            <Carousel.Item
+              key={index}
+              style={{ borderRadius: "12px", overflow: "visible" }}
+            >
+              <img
+                style={{
+                  width: "100%",
+                  height: "220px",
+                  borderRadius: "12px", // Bo góc 12px cho hình ảnh
+                  objectFit: "cover",
+                  objectPosition: "center", // Đảm bảo hình ảnh hiển thị đúng với bo góc
+                  display: "block", // Loại bỏ khoảng trống dưới hình ảnh
+                }}
+                src={room1}
+                alt=""
+              />
+            </Carousel.Item>
+          ))}
+        </Carousel>
+
+        <CustomHeart
+          isFavourite={isFavorite}
+          handleFavoriteClick={handleFavoriteClick}
+        />
       </div>
-    </div>
+
+      {/* Nội dung thẻ */}
+      <Card.Body className="p-3" style={{ padding: "10px 0" }}>
+        <Card.Title style={{ fontSize: "16px", fontWeight: "bold" }}>
+          Koutsounari, HY Lạp
+        </Card.Title>
+        <Card.Text style={{ fontSize: "14px", color: "#6c757d" }}>
+          3 giường - 3 phòng ngủ
+        </Card.Text>
+        <Card.Text style={{ fontSize: "14px", fontWeight: "bold" }}>
+          đ262.560.283 / tháng
+        </Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
 
 export default RoomCard;
+
+const CustomHeart = ({ isFavourite = true, handleFavoriteClick }) => {
+  return (
+    <>
+      {isFavourite ? (
+        <FaHeart
+          size={24}
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            color: "red",
+            padding: "3px", // Khoảng cách giữa biểu tượng và viền
+            cursor: "pointer",
+            zIndex: 1, // Đảm bảo biểu tượng nằm trên carousel
+          }}
+          onClick={handleFavoriteClick} // Sự kiện khi ấn vào trái tim
+        />
+      ) : (
+        <FaRegHeart
+          size={24}
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            color: "white", // Màu của biểu tượng
+            // Làm trái tim nằm trong một vòng tròn
+            padding: "3px", // Khoảng cách giữa biểu tượng và viền
+            cursor: "pointer",
+            zIndex: 1, // Đảm bảo biểu tượng nằm trên carousel
+          }}
+          onClick={handleFavoriteClick} // Sự kiện khi ấn vào trái tim
+        />
+      )}
+    </>
+  );
+};
