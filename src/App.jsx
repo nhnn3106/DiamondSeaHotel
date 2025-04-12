@@ -9,23 +9,32 @@ import RoomTypeProvider from "./hooks/RoomTypeProvider";
 import NavigateProvider from "./hooks/NavigateProvider";
 import HotelHot from "./pages/HotelHot";
 import MainLayout from "./layouts/MainLayout";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import AuthProvider from "./hooks/AuthProvider";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
-    <NavigateProvider>
-      <RoomTypeProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<MainLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/hotelhot" element={<HotelHot />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </RoomTypeProvider>
-    </NavigateProvider>
+    <AuthProvider>
+      <NavigateProvider>
+        <RoomTypeProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/hotelhot" element={<HotelHot />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </RoomTypeProvider>
+      </NavigateProvider>
+    </AuthProvider>
   );
 }
 
