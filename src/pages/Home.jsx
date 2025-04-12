@@ -9,11 +9,7 @@ import Contact from "./Contact";
 const Home = () => {
   return (
     <>
-      <Header />
-      <section style={{ marginTop: "220px" }}>
-        <RoomList />
-      </section>
-      <Footer />
+      <RoomList />
     </>
   );
 };
