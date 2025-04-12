@@ -5,9 +5,12 @@ import { additionalHotelData } from "../data/data";
 import ImageGallery from "../components/ImageGallery";
 import ListingInfo from "../components/ListingInfo";
 import BookingCard from "../components/BookingCard";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 function HotelHot() {
   return (
     <>
+      <Header />
       {additionalHotelData.map((hotel) => (
         <div className="App" key={hotel.id}>
           <ImageGallery hotel={hotel} />
@@ -23,6 +26,7 @@ function HotelHot() {
           </Container>
         </div>
       ))}
+      <Footer />
     </>
   );
 }
