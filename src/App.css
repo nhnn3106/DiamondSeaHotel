@@ -662,3 +662,290 @@ input[type="checkbox"]:checked {
   color: #222;
   cursor: pointer;
 }
+:root {
+  --about-primary-pink: #FF385C;
+  --about-primary-brown: #4a2c2a;
+
+  
+}
+
+.About-text-pink {
+  color: var(--about-primary-pink) !important;
+}
+
+.About-bg-pink {
+  background-color: var(--about-primary-pink) !important;
+}
+
+.About-border-pink {
+  border-color: var(--about-primary-pink) !important;
+}
+
+.About-text-brown {
+  color: var(--about-primary-brown) !important;
+}
+
+.About-button-pink-solid {
+  background-color: var(--about-primary-pink);
+  color: var(--about-primary-brown);
+  border-color: var(--about-primary-pink);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.About-button-pink-solid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.About-button-pink-solid:hover::before,
+.About-button-pink-solid:focus::before {
+  transform: scaleX(1);
+}
+
+.About-button-pink-solid:hover,
+.About-button-pink-solid:focus {
+  color: var(--about-primary-brown);
+  box-shadow: 0 0 20px rgba(255, 56, 92, 0.4);
+}
+
+.About-button-pink-outline {
+  color: var(--about-primary-pink);
+  border-color: var(--about-primary-pink);
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.About-button-pink-outline:hover,
+.About-button-pink-outline:focus {
+  color: var(--about-primary-brown);
+  background-color: var(--about-primary-pink);
+  border-color: var(--about-primary-pink);
+}
+
+.About-heading-hover {
+  transition: transform 0.3s ease;
+}
+
+.About-heading-hover:hover {
+  transform: scale(1.03);
+}
+
+.About-carousel-image {
+  height: 400px;
+  object-fit: cover;
+  width: 100%;
+}
+/* Contact.css */
+
+:root {
+  --contact-accent-pink: #FF385C;
+  --contact-accent-pink-rgb: 255, 56, 92;
+  --aurora-color-1: rgba(56, 189, 248, 0.3);
+  --aurora-color-2: rgba(167, 139, 250, 0.3);
+  --aurora-color-3: rgba(244, 114, 182, 0.3);
+  --aurora-color-4: rgba(40, 40, 60, 1);
+  --contact-glass-bg: rgba(255, 255, 255, 0.08);
+  --contact-glass-border: rgba(255, 255, 255, 0.15);
+  --contact-glass-shadow: rgba(0, 0, 0, 0.2);
+  --contact-text-light-primary: #f8f9fa;
+  --contact-text-light-secondary: #ced4da;
+  --contact-form-glass-bg: rgba(255, 255, 255, 0.05);
+  --contact-form-glass-border: rgba(255, 255, 255, 0.1);
+}
+
+.Contact-aurora-wrapper {
+  background-color: var(--aurora-color-4);
+  background-image:
+    radial-gradient(at 20% 15%, var(--aurora-color-1) 0px, transparent 50%),
+    radial-gradient(at 80% 25%, var(--aurora-color-2) 0px, transparent 50%),
+    radial-gradient(at 30% 85%, var(--aurora-color-3) 0px, transparent 50%),
+    radial-gradient(at 75% 75%, var(--aurora-color-1) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--contact-text-light-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.Contact-card-glass {
+  background-color: var(--contact-glass-bg) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--contact-glass-border);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px 0 var(--contact-glass-shadow);
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+  color: var(--contact-text-light-primary);
+}
+
+.Contact-card-glass:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3);
+}
+
+.Contact-info-item { }
+
+.Contact-info-icon-wrapper {
+  background-color: rgba(var(--contact-accent-pink-rgb), 0.2);
+  color: var(--contact-accent-pink);
+  border-radius: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border: 1px solid rgba(var(--contact-accent-pink-rgb), 0.3);
+}
+
+.Contact-info-heading {
+  color: var(--contact-accent-pink);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.Contact-info-text {
+  color: var(--contact-text-light-secondary);
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.Contact-form-control {
+  background-color: var(--contact-form-glass-bg) !important;
+  border: 1px solid var(--contact-form-glass-border) !important;
+  color: var(--contact-text-light-primary) !important;
+  border-radius: 0.6rem;
+  padding-top: 1.625rem;
+  padding-bottom: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  min-height: calc(1.5em + 1.25rem + 2px);
+  height: calc(3.5rem + 2px);
+  line-height: 1.25;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Contact-form-control:is(textarea) {
+  min-height: calc(1.5em + 1.25rem + 2px);
+  height: auto;
+}
+
+.Contact-form-control:focus {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--contact-accent-pink) !important;
+  color: var(--contact-text-light-primary) !important;
+  box-shadow: 0 0 0 0.25rem rgba(var(--contact-accent-pink-rgb), 0.3);
+  outline: 0;
+}
+
+.Contact-floating-label {
+  position: relative;
+}
+
+.Contact-floating-label > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 0.8rem 0.75rem;
+  pointer-events: none;
+  border: 1px solid transparent;
+  transform-origin: 0 0;
+  transition: opacity .15s ease-in-out, transform .15s ease-in-out;
+  color: var(--contact-text-light-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.Contact-floating-label > textarea.form-control ~ label {
+  height: auto;
+}
+
+.Contact-floating-label > .form-control:focus ~ label,
+.Contact-floating-label > .form-control:not(:placeholder-shown) ~ label {
+  opacity: 0.85;
+  transform: scale(0.85) translateY(-0.6rem) translateX(0.15rem);
+  color: var(--contact-accent-pink);
+  background-color: transparent !important;
+  background-image: none !important;
+  padding: 0 0.3rem;
+  height: auto;
+  width: auto;
+}
+
+.Contact-form-control::placeholder {
+  color: transparent !important;
+  opacity: 0;
+}
+
+.Contact-form-control:focus::placeholder {
+  color: transparent !important;
+  opacity: 0;
+}
+
+.Contact-button-pink {
+  background-color: var(--contact-accent-pink);
+  color: white;
+  border: 1px solid var(--contact-accent-pink);
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 10px rgba(var(--contact-accent-pink-rgb), 0.2);
+}
+
+.Contact-button-pink:hover,
+.Contact-button-pink:focus {
+  background-color: rgba(var(--contact-accent-pink-rgb), 0.9);
+  color: white;
+  border-color: rgba(var(--contact-accent-pink-rgb), 0.9);
+  box-shadow: 0 6px 20px rgba(var(--contact-accent-pink-rgb), 0.4);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.Contact-button-pink:disabled {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--contact-text-light-secondary);
+  box-shadow: none;
+  transform: none;
+}
+
+.Contact-map-container {
+  height: 380px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--contact-glass-border);
+  box-shadow: 0 8px 32px 0 var(--contact-glass-shadow);
+  background-color: rgba(0,0,0, 0.2);
+}
+
+.Contact-map-container .leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.Contact-main-heading {
+  color: var(--contact-text-light-primary);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.Contact-text-light-secondary {
+  color: var(--contact-text-light-secondary) !important;
+}

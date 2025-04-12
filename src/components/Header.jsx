@@ -6,6 +6,7 @@ import { Globe } from "lucide-react";
 import UserActions from "./UserActions";
 import SearchbarFiller from "./SearchbarFiller";
 import FilterBar from "./FilterBar"; // Import FilterBar component
+import { Link } from "react-router-dom";
 
 const Header = ({ searchData, updateSearchData }) => {
   const [showSearchFiller, setShowSearchFiller] = useState(false);
@@ -63,7 +64,19 @@ const Header = ({ searchData, updateSearchData }) => {
           )}
         </Container>
         <Container className="me-5" style={{ width: "900px" }}>
-          <div className="btn-item p-2 fw-semibold">About</div>
+          <Link
+            to="/about"
+            className="btn-item p-2 fw-semibold text-black text-decoration-none"
+          >
+            About
+          </Link>
+          <Link
+            to="/contact"
+            className="btn-item p-2 fw-semibold text-black text-decoration-none"
+          >
+            Contact
+          </Link>
+
           <div
             className="btn-item p-2 fw-semibold"
             style={{ fontSize: "13px", width: "max-content" }}
