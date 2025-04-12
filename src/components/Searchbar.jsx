@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Search } from "lucide-react";
+import { RoomTypeContext } from "../hooks/RoomTypeProvider";
 
 const SearchBar = ({
   showSearchFiller,
   setShowSearchFiller,
   setItemSelected, // Thêm prop setItemSelected
-  searchData,
 }) => {
+  const { searchData } = useContext(RoomTypeContext);
+
   const handleItemClick = (item) => {
     setShowSearchFiller(true); // Hiển thị SearchbarFiller
     setItemSelected(item); // Cập nhật item được chọn

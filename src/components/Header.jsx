@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  useContext,
+} from "react";
 import Logo from "./Logo";
 import { Container, Navbar } from "react-bootstrap";
 import SearchBar from "./Searchbar";
@@ -7,22 +13,20 @@ import UserActions from "./UserActions";
 import SearchbarFiller from "./SearchbarFiller";
 import FilterBar from "./FilterBar"; // Import FilterBar component
 import { Link } from "react-router-dom";
+import { RoomTypeContext } from "../hooks/RoomTypeProvider";
+import { NavigateContext } from "../hooks/NavigateProvider";
 
-const Header = ({ searchData, updateSearchData }) => {
+const Header = () => {
+  const { paths } = useContext(NavigateContext);
+
+  const { searchData, updateSearchData, filters, setFilters } =
+    useContext(RoomTypeContext);
   const [showSearchFiller, setShowSearchFiller] = useState(false);
   const [itemSelected, setItemSelected] = useState("");
   const lastScrollY = useRef(0);
   const rafId = useRef(null);
   const isScrolling = useRef(false);
   const headerRef = useRef(null);
-
-  // Trạng thái bộ lọc
-  const [filters, setFilters] = useState({
-    roomType: "Any", // Loại phòng: Any, Entire home, Private room, Shared room
-    priceRange: [50, 500], // Khoảng giá: [min, max]
-    amenities: [], // Tiện nghi: danh sách các tiện nghi được chọn
-  });
-
   // Xử lý click bên ngoài để đóng SearchFiller
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -44,39 +48,42 @@ const Header = ({ searchData, updateSearchData }) => {
       style={{ top: 0, zIndex: 1000 }}
       ref={headerRef}
     >
-      <Navbar className={`py-5 ${!showSearchFiller ? "border-bottom" : ""}`}>
-        <Container className="ms-5">
+      <Navbar
+        className={` ${!showSearchFiller ? "border-bottom" : ""}`}
+        style={{ padding: "35px 0px" }}
+      >
+        <Container className="ms-5" style={{ paddingRight: "500px" }}>
           <Navbar.Brand>
             <Logo />
           </Navbar.Brand>
+          <Link
+            style={{ marginLeft: "100px" }}
+            to={paths.about}
+            className="btn-item p-2 fw-semibold text-black text-decoration-none"
+          >
+            About
+          </Link>
+          <Link
+            style={{ marginRight: "100px" }}
+            to={paths.contact}
+            className="btn-item p-2 fw-semibold text-black text-decoration-none"
+          >
+            Contact
+          </Link>
         </Container>
         <Container
           className="position-relative"
-          style={{ marginLeft: "-50px" }}
+          style={{ marginLeft: "-500px" }}
         >
           {!showSearchFiller && (
             <SearchBar
               showSearchFiller={showSearchFiller}
               setShowSearchFiller={setShowSearchFiller}
               setItemSelected={setItemSelected}
-              searchData={searchData}
             />
           )}
         </Container>
         <Container className="me-5" style={{ width: "900px" }}>
-          <Link
-            to="/about"
-            className="btn-item p-2 fw-semibold text-black text-decoration-none"
-          >
-            About
-          </Link>
-          <Link
-            to="/contact"
-            className="btn-item p-2 fw-semibold text-black text-decoration-none"
-          >
-            Contact
-          </Link>
-
           <div
             className="btn-item p-2 fw-semibold"
             style={{ fontSize: "13px", width: "max-content" }}
@@ -110,7 +117,7 @@ const Header = ({ searchData, updateSearchData }) => {
         style={{ zIndex: 1 }}
       >
         <Container className="d-flex justify-content-center">
-          <FilterBar filters={filters} setFilters={setFilters} />
+          <FilterBar />
         </Container>
       </Navbar>
     </div>

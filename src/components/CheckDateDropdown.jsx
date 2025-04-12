@@ -1,7 +1,14 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { RoomTypeContext } from "../hooks/RoomTypeProvider";
 
-const CheckDateDropdown = ({ checkInDate, checkOutDate, updateSearchData }) => {
+const CheckDateDropdown = ({
+  onSelectCheckIn,
+  onSelectCheckOut,
+  onSelectLocation,
+}) => {
+  const { checkInDate, checkOutDate, updateSearchData } =
+    useContext(RoomTypeContext);
   const [selectedStartDate, setSelectedStartDate] = useState(checkInDate);
   const [selectedEndDate, setSelectedEndDate] = useState(checkOutDate);
   const [checkDate, setCheckDate] = useState({
@@ -68,6 +75,7 @@ const CheckDateDropdown = ({ checkInDate, checkOutDate, updateSearchData }) => {
         checkInDate: clickedDate,
         checkOutDate: null,
       });
+      onSelectCheckIn();
     } else if (selectedStartDate && !selectedEndDate) {
       if (clickedDate >= selectedStartDate) {
         setSelectedEndDate(clickedDate);
@@ -80,6 +88,7 @@ const CheckDateDropdown = ({ checkInDate, checkOutDate, updateSearchData }) => {
           checkInDate: selectedStartDate,
           checkOutDate: clickedDate,
         });
+        onSelectCheckOut();
       } else {
         setSelectedEndDate(selectedStartDate);
         setSelectedStartDate(clickedDate);
@@ -92,6 +101,7 @@ const CheckDateDropdown = ({ checkInDate, checkOutDate, updateSearchData }) => {
           checkInDate: clickedDate,
           checkOutDate: selectedStartDate,
         });
+        onSelectLocation();
       }
     }
   };

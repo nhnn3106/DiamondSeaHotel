@@ -1,7 +1,12 @@
 import { Minus, Plus } from "lucide-react";
-import React from "react";
+import { useContext } from "react";
+import { RoomTypeContext } from "../hooks/RoomTypeProvider";
 
-const GuestDropdown = ({ guests, updateSearchData }) => {
+const GuestDropdown = () => {
+  const { searchData, updateSearchData } = useContext(RoomTypeContext);
+
+  const guests = searchData.guests;
+
   return (
     <div
       className="guest-dropdown position-absolute bg-white border p-4"

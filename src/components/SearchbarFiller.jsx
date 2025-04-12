@@ -1,16 +1,17 @@
 import { Search } from "lucide-react";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import LocationDropdown from "./LocationDropdown";
 import CheckDateDropdown from "./CheckDateDropdown";
 import GuestDropdown from "./GuestDropdown";
+import { RoomTypeContext } from "../hooks/RoomTypeProvider";
 
 const SearchbarFiller = ({
-  searchData,
-  updateSearchData,
   setShowSearchFiller,
   itemSelected, // Nhận itemSelected từ Header
   setItemSelected, // Nhận setItemSelected để cập nhật
 }) => {
+  const { searchData, updateSearchData } = useContext(RoomTypeContext);
+
   // Đồng bộ itemSelected từ Header với state nội bộ
   const [localItemSelected, setLocalItemSelected] = useState(itemSelected);
 
@@ -30,10 +31,18 @@ const SearchbarFiller = ({
   };
 
   // Tự động select "check-in" sau khi chọn địa điểm
-  const handleLocationSelect = (location) => {
-    updateSearchData({ location });
+  const handleLocationSelect = () => {
     setLocalItemSelected("check-in");
     setItemSelected("check-in"); // Cập nhật itemSelected ở Header
+  };
+
+  const handleCheckInSelect = () => {
+    setLocalItemSelected("check-out");
+    setItemSelected("check-out"); // Cập nhật itemSelected ở Header
+  };
+  const handleCheckOutSelect = () => {
+    setLocalItemSelected("");
+    setItemSelected(""); // Cập nhật itemSelected ở Header
   };
 
   return (
@@ -92,9 +101,9 @@ const SearchbarFiller = ({
         {(localItemSelected === "check-in" ||
           localItemSelected === "check-out") && (
           <CheckDateDropdown
-            checkInDate={searchData.checkInDate}
-            checkOutDate={searchData.checkOutDate}
-            updateSearchData={updateSearchData}
+            onSelectCheckIn={handleCheckInSelect}
+            onSelectCheckOut={handleCheckOutSelect}
+            onSelectLocation={handleLocationSelect}
           />
         )}
       </div>
@@ -127,12 +136,7 @@ const SearchbarFiller = ({
             <Search size={18} className="ms-2" />
           </div>
         </div>
-        {localItemSelected === "guest" && (
-          <GuestDropdown
-            guests={searchData.guests}
-            updateSearchData={updateSearchData}
-          />
-        )}
+        {localItemSelected === "guest" && <GuestDropdown />}
       </div>
     </div>
   );

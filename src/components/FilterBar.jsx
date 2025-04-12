@@ -1,55 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  ChevronDown,
-  Home,
-  DoorClosed,
-  Users,
-  Wifi,
-  ChefHat,
-  Car,
-  Snowflake,
-  Waves,
-} from "lucide-react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { ChevronDown } from "lucide-react";
 import PriceFilter from "./PriceFilter"; // Import PriceFilter
+import { RoomTypeContext } from "../hooks/RoomTypeProvider";
 
-const FilterBar = ({ filters, setFilters }) => {
+const FilterBar = () => {
+  const {
+    filters,
+    roomTypes,
+    availableAmenities,
+    handleRoomTypeChange,
+    handlePriceChange,
+    handleAmenityChange,
+  } = useContext(RoomTypeContext);
+
   const [showAmenitiesDropdown, setShowAmenitiesDropdown] = useState(false);
   const amenitiesRef = useRef(null);
-
-  // Danh sách các loại phòng với icon tương ứng
-  const roomTypes = [
-    { name: "Any", icon: <Home size={20} /> },
-    { name: "Homestay", icon: <Home size={20} /> },
-    { name: "Private room", icon: <DoorClosed size={20} /> },
-    { name: "Shared room", icon: <Users size={20} /> },
-  ];
-
-  // Danh sách tiện nghi với icon
-  const availableAmenities = [
-    { name: "Wi-Fi", icon: <Wifi size={16} /> },
-    { name: "Kitchen", icon: <ChefHat size={16} /> },
-    { name: "Parking", icon: <Car size={16} /> },
-    { name: "Air conditioning", icon: <Snowflake size={16} /> },
-    { name: "Pool", icon: <Waves size={16} /> },
-  ];
-
-  // Xử lý thay đổi loại phòng
-  const handleRoomTypeChange = (roomType) => {
-    setFilters((prev) => ({ ...prev, roomType }));
-  };
-
-  // Xử lý thay đổi giá
-  const handlePriceChange = (newPriceRange) => {
-    setFilters((prev) => ({ ...prev, priceRange: newPriceRange }));
-  };
-
-  // Xử lý thay đổi tiện nghi
-  const handleAmenityChange = (amenity) => {
-    const updatedAmenities = filters.amenities.includes(amenity)
-      ? filters.amenities.filter((item) => item !== amenity)
-      : [...filters.amenities, amenity];
-    setFilters((prev) => ({ ...prev, amenities: updatedAmenities }));
-  };
 
   // Xử lý click bên ngoài để đóng dropdown tiện nghi
   useEffect(() => {
