@@ -175,7 +175,7 @@ function Contact() {
               </Card>
 
               <div className="Contact-map-container">
-                <MapContainer center={new LatLng(10.762622, 106.660172)} zoom={15} scrollWheelZoom={false}>
+                <MapContainer center={new LatLng(10.762622, 106.660172)} zoom={15} >
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'/>
                   <Marker position={new LatLng(10.762622, 106.660172)}>
                     <Popup>Amazing Food <br /> 123 Nguyễn Huệ, Q.1</Popup>

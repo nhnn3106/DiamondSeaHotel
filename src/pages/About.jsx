@@ -8,8 +8,8 @@ import InsideInfor from "../components/InsideInfo";
 export default function About() {
   const carouselImages = [
     "https://pistachiohotel.com/UploadFile/Gallery/Overview/a2.jpg",
-    "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
-    "https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1547&q=80",
+    "https://kconceptvn.com/wp-content/uploads/2020/04/hotel-photography-chup-anh-khach-san-khach-san-bamboo-sapa-hotel-18-1024x683.jpg",
+    "https://khachsandep.com.vn/storage/files/dothanhnga/anh1.jpg",
   ];
 
   return (
