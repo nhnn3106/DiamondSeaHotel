@@ -8,6 +8,7 @@ const NavigateProvider = ({ children }) => {
     home: "/",
     contact: "/contact",
     about: "/about",
+    hotelhot: "/hotelhot"
   };
 
   return (

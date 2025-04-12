@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import RoomTypeProvider from "./hooks/RoomTypeProvider";
 import NavigateProvider from "./hooks/NavigateProvider";
+import HotelHot from "./pages/HotelHot";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/hotelhot" element={<HotelHot />} />
           </Routes>
         </BrowserRouter>
       </RoomTypeProvider>

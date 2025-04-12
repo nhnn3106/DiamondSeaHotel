@@ -70,6 +70,17 @@ const Header = () => {
           >
             Contact
           </Link>
+          <Link
+            style={{ marginRight: "100px" }}
+            to={paths.hotelhot}
+            className="btn-item p-2 fw-semibold text-black text-decoration-none"
+          >
+            <span
+              style={{ color: "red", fontWeight: "bold", fontSize: "20px" }}
+            >
+              Hot
+            </span>
+          </Link>
         </Container>
         <Container
           className="position-relative"
