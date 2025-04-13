@@ -6,7 +6,7 @@ import React, {
   useContext,
 } from "react";
 import Logo from "./Logo";
-import { Container, Navbar } from "react-bootstrap";
+import { Container, Navbar, Nav } from "react-bootstrap";
 import SearchBar from "./Searchbar";
 import { Globe } from "lucide-react";
 import UserActions from "./UserActions";
@@ -56,31 +56,36 @@ const Header = () => {
           <Navbar.Brand>
             <Logo />
           </Navbar.Brand>
-          <Link
-            style={{ marginLeft: "100px" }}
-            to={paths.about}
-            className="btn-item p-2 fw-semibold text-black text-decoration-none"
-          >
-            About
-          </Link>
-          <Link
-            style={{ marginRight: "100px" }}
-            to={paths.contact}
-            className="btn-item p-2 fw-semibold text-black text-decoration-none"
-          >
-            Contact
-          </Link>
-          <Link
-            style={{ marginRight: "100px" }}
-            to={paths.hotelhot}
-            className="btn-item p-2 fw-semibold text-black text-decoration-none"
-          >
-            <span
-              style={{ color: "red", fontWeight: "bold", fontSize: "20px" }}
-            >
-              Hot
-            </span>
-          </Link>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav>
+              <Link
+                style={{ marginLeft: "100px" }}
+                to={paths.about}
+                className="btn-item p-2 fw-semibold text-black text-decoration-none"
+              >
+                About
+              </Link>
+              <Link
+                style={{ marginRight: "100px" }}
+                to={paths.contact}
+                className="btn-item p-2 fw-semibold text-black text-decoration-none"
+              >
+                Contact
+              </Link>
+              <Link
+                style={{ marginRight: "100px" }}
+                to={paths.hotelhot}
+                className="btn-item p-2 fw-semibold text-black text-decoration-none"
+              >
+                <span
+                  style={{ color: "red", fontWeight: "bold", fontSize: "20px" }}
+                >
+                  Hot
+                </span>
+              </Link>
+            </Nav>
+          </Navbar.Collapse>
         </Container>
         <Container
           className="position-relative"
@@ -97,7 +102,7 @@ const Header = () => {
         <Container className="me-5" style={{ width: "900px" }}>
           <div
             className="btn-item p-2 fw-semibold"
-            style={{ fontSize: "13px", width: "max-content" }}
+            style={{ width: "max-content" }}
           >
             Cho thuê chỗ ở qua Airbnb
           </div>
@@ -108,9 +113,8 @@ const Header = () => {
         </Container>
       </Navbar>
       <Navbar
-        className={`search-bar-filler position-relative ${
-          showSearchFiller ? "fade-in d-block border-bottom" : "fade-out d-none"
-        }`}
+        className={`search-bar-filler position-relative ${showSearchFiller ? "fade-in d-block border-bottom" : "fade-out d-none"
+          }`}
         style={{ zIndex: 2 }}
       >
         <Container className="d-flex justify-content-center">
