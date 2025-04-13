@@ -151,7 +151,6 @@ const Profile = () => {
 
     return (
         <>
-            <Header />
             <Container className="py-5" style={{ marginTop: "250px" }}>
                 <Row>
                     <Col lg={3} md={4}>
@@ -283,7 +282,6 @@ const Profile = () => {
                     </Col>
                 </Row>
             </Container>
-            <Footer />
         </>
     );
 };

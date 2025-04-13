@@ -21,7 +21,6 @@ const UserActionDropdown = () => {
         zIndex: 2000,
         pointerEvents: "auto",
       }}
-      onClick={(e) => e.stopPropagation()}
     >
       <ul className="user-action-list list-unstyled m-0">
         {isAuthenticated ? (

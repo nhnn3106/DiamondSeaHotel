@@ -49,7 +49,6 @@ const Register = () => {
 
     return (
         <>
-            <Header />
             <Container className="py-5" style={{ marginTop: "250px" }}>
                 <Row className="justify-content-center">
                     <Col md={8} lg={6}>
@@ -122,7 +121,6 @@ const Register = () => {
                     </Col>
                 </Row>
             </Container>
-            <Footer />
         </>
     );
 };

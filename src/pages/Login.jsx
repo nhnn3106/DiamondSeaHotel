@@ -41,7 +41,6 @@ const Login = () => {
 
     return (
         <>
-            <Header />
             <Container className="py-5" style={{ marginTop: "250px" }}>
                 <Row className="justify-content-center">
                     <Col md={6} lg={5}>
@@ -90,7 +89,6 @@ const Login = () => {
                     </Col>
                 </Row>
             </Container>
-            <Footer />
         </>
     );
 };
