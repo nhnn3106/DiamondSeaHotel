@@ -3,8 +3,10 @@ import { Card, Carousel } from "react-bootstrap";
 import { Heart } from "lucide-react"; // Sử dụng biểu tượng trái tim từ lucide-react
 import room1 from "../assets/roomImages/room-1.png";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const RoomCard = () => {
+const RoomCard = ({ roomId = 1 }) => {
+  const navigate = useNavigate();
   // Số lượng hình ảnh trong Carousel (minh họa 3 hình ảnh)
   const imageCount = 3;
 
@@ -12,8 +14,13 @@ const RoomCard = () => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   // Hàm xử lý khi ấn vào trái tim
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation(); // Ngăn sự kiện click lan ra card
     setIsFavorite(!isFavorite);
+  };
+
+  const handleCardClick = () => {
+    navigate(`/room/${roomId}`);
   };
 
   return (
@@ -22,8 +29,10 @@ const RoomCard = () => {
         width: "18rem",
         borderRadius: "12px", // Bo góc 12px cho Card
         overflow: "visible", // Đảm bảo không cắt xén các góc
+        cursor: "pointer", // Thêm con trỏ pointer để thể hiện có thể click
       }}
       className="room-card border m-4"
+      onClick={handleCardClick} // Thêm sự kiện click vào card
     >
       {/* Carousel với biểu tượng trái tim */}
       <div style={{ position: "relative", overflow: "visible" }}>

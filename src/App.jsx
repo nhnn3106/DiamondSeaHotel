@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AuthProvider from "./hooks/AuthProvider";
 import Profile from "./pages/Profile";
+import RoomDetail from './components/RoomDetail';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/room/:id" element={<RoomDetail />} />
               </Route>
             </Routes>
           </BrowserRouter>

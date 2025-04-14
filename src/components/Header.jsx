@@ -11,13 +11,15 @@ import SearchBar from "./Searchbar";
 import { Globe } from "lucide-react";
 import UserActions from "./UserActions";
 import SearchbarFiller from "./SearchbarFiller";
-import FilterBar from "./FilterBar"; // Import FilterBar component
-import { Link } from "react-router-dom";
+import FilterBar from "./FilterBar";
+import { Link, useLocation } from "react-router-dom";
 import { RoomTypeContext } from "../hooks/RoomTypeProvider";
 import { NavigateContext } from "../hooks/NavigateProvider";
 
 const Header = () => {
   const { paths } = useContext(NavigateContext);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const { searchData, updateSearchData, filters, setFilters } =
     useContext(RoomTypeContext);
@@ -27,6 +29,7 @@ const Header = () => {
   const rafId = useRef(null);
   const isScrolling = useRef(false);
   const headerRef = useRef(null);
+
   // Xử lý click bên ngoài để đóng SearchFiller
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -54,7 +57,9 @@ const Header = () => {
       >
         <Container className="ms-5" style={{ paddingRight: "500px" }}>
           <Navbar.Brand>
-            <Logo />
+            <Link to="/">
+              <Logo />
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -113,8 +118,9 @@ const Header = () => {
         </Container>
       </Navbar>
       <Navbar
-        className={`search-bar-filler position-relative ${showSearchFiller ? "fade-in d-block border-bottom" : "fade-out d-none"
-          }`}
+        className={`search-bar-filler position-relative ${
+          showSearchFiller ? "fade-in d-block border-bottom" : "fade-out d-none"
+        }`}
         style={{ zIndex: 2 }}
       >
         <Container className="d-flex justify-content-center">
@@ -127,14 +133,16 @@ const Header = () => {
           />
         </Container>
       </Navbar>
-      <Navbar
-        className="filter-bar border-bottom py-3 bg-white"
-        style={{ zIndex: 1 }}
-      >
-        <Container className="d-flex justify-content-center">
-          <FilterBar />
-        </Container>
-      </Navbar>
+      {isHomePage && (
+        <Navbar
+          className="filter-bar border-bottom py-3 bg-white"
+          style={{ zIndex: 1 }}
+        >
+          <Container className="d-flex justify-content-center">
+            <FilterBar />
+          </Container>
+        </Navbar>
+      )}
     </div>
   );
 };
