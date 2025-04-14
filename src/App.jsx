@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import RoomTypeProvider from "./hooks/RoomTypeProvider";
+import RoomTypeProvider from "./hooks/RoomProvider";
 import NavigateProvider from "./hooks/NavigateProvider";
 import HotelHot from "./pages/HotelHot";
 import MainLayout from "./layouts/MainLayout";
