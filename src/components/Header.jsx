@@ -11,9 +11,10 @@ import SearchBar from "./Searchbar";
 import { Globe } from "lucide-react";
 import UserActions from "./UserActions";
 import SearchbarFiller from "./SearchbarFiller";
-import FilterBar from "./FilterBar";
-import { Link, useLocation } from "react-router-dom";
-import { RoomTypeContext } from "../hooks/RoomTypeProvider";
+import FilterBar from "./FilterBar"; // Import FilterBar component
+import { Link } from "react-router-dom";
+import { RoomTypeContext } from "../hooks/RoomProvider";
+import { useLocation } from "react-router-dom";
 import { NavigateContext } from "../hooks/NavigateProvider";
 
 const Header = () => {
@@ -55,7 +56,7 @@ const Header = () => {
         className={` ${!showSearchFiller ? "border-bottom" : ""}`}
         style={{ padding: "35px 0px" }}
       >
-        <Container className="ms-5" style={{ paddingRight: "500px" }}>
+        <Container className="ms-5" style={{ paddingRight: "0" }}>
           <Navbar.Brand>
             <Link to="/">
               <Logo />
@@ -94,7 +95,7 @@ const Header = () => {
         </Container>
         <Container
           className="position-relative"
-          style={{ marginLeft: "-500px" }}
+          style={{ marginLeft: "-105px" }}
         >
           {!showSearchFiller && (
             <SearchBar
@@ -104,7 +105,7 @@ const Header = () => {
             />
           )}
         </Container>
-        <Container className="me-5" style={{ width: "900px" }}>
+        <Container className="me-5" style={{ width: "max-content" }}>
           <div
             className="btn-item p-2 fw-semibold"
             style={{ width: "max-content" }}

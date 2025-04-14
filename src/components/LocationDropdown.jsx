@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { RoomTypeContext } from "../hooks/RoomTypeProvider";
+import { RoomTypeContext } from "../hooks/RoomProvider";
 
 const LocationDropdown = ({ onSelect }) => {
   const { locations, updateSearchData } = useContext(RoomTypeContext);

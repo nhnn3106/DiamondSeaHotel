@@ -1,6 +1,6 @@
 import { Minus, Plus } from "lucide-react";
 import { useContext } from "react";
-import { RoomTypeContext } from "../hooks/RoomTypeProvider";
+import { RoomTypeContext } from "../hooks/RoomProvider";
 
 const GuestDropdown = () => {
   const { searchData, updateSearchData } = useContext(RoomTypeContext);

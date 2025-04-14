@@ -5,7 +5,7 @@ import room1 from "../assets/roomImages/room-1.png";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const RoomCard = ({ roomId = 1 }) => {
+const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   const navigate = useNavigate();
   // Số lượng hình ảnh trong Carousel (minh họa 3 hình ảnh)
   const imageCount = 3;
@@ -25,11 +25,12 @@ const RoomCard = ({ roomId = 1 }) => {
 
   return (
     <Card
+      id={id}
       style={{
         width: "18rem",
         borderRadius: "12px", // Bo góc 12px cho Card
         overflow: "visible", // Đảm bảo không cắt xén các góc
-        cursor: "pointer", // Thêm con trỏ pointer để thể hiện có thể click
+        cursor: "pointer",
       }}
       className="room-card border m-4"
       onClick={handleCardClick} // Thêm sự kiện click vào card
@@ -43,9 +44,9 @@ const RoomCard = ({ roomId = 1 }) => {
           className="custom-carousel"
           style={{ borderRadius: "12px", overflow: "visible" }} // Đảm bảo Carousel không cắt xén
         >
-          {Array.from({ length: imageCount }).map((_, index) => (
+          {images.map((img) => (
             <Carousel.Item
-              key={index}
+              key={img.imageID}
               style={{ borderRadius: "12px", overflow: "visible" }}
             >
               <img
@@ -57,7 +58,8 @@ const RoomCard = ({ roomId = 1 }) => {
                   objectPosition: "center", // Đảm bảo hình ảnh hiển thị đúng với bo góc
                   display: "block", // Loại bỏ khoảng trống dưới hình ảnh
                 }}
-                src={room1}
+                loading="lazy"
+                src={img.pathImg}
                 alt=""
               />
             </Carousel.Item>
@@ -73,13 +75,13 @@ const RoomCard = ({ roomId = 1 }) => {
       {/* Nội dung thẻ */}
       <Card.Body className="p-3" style={{ padding: "10px 0" }}>
         <Card.Title style={{ fontSize: "16px", fontWeight: "bold" }}>
-          Koutsounari, HY Lạp
+          {location}
         </Card.Title>
         <Card.Text style={{ fontSize: "14px", color: "#6c757d" }}>
-          3 giường - 3 phòng ngủ
+          {`${bedCount} giường ${bedType}`}
         </Card.Text>
         <Card.Text style={{ fontSize: "14px", fontWeight: "bold" }}>
-          đ262.560.283 / tháng
+          ${price}
         </Card.Text>
       </Card.Body>
     </Card>

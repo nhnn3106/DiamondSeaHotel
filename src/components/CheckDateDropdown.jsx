@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useState, useEffect, useContext } from "react";
-import { RoomTypeContext } from "../hooks/RoomTypeProvider";
+import { RoomTypeContext } from "../hooks/RoomProvider";
 
 const CheckDateDropdown = ({
   onSelectCheckIn,
