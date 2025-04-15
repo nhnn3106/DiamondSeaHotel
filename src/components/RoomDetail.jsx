@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useBooking } from "../context/BookingContext";
 import {
   FaBed,
   FaParking,
@@ -38,7 +39,32 @@ L.Icon.Default.mergeOptions({
 });
 
 const RoomDetail = () => {
-  const { id } = useParams();
+  const { id = 2 } = useParams();
+  const { bookingData, updateBooking, errors, validateBooking } = useBooking();
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  useEffect(() => {
+    updateBooking({ roomId: parseInt(id) });
+  }, [id, updateBooking]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    updateBooking({ [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (validateBooking(bookingData)) {
+      const nights = Math.ceil(
+        (new Date(bookingData.checkOutDate) - new Date(bookingData.checkInDate)) / (1000 * 60 * 60 * 24)
+      );
+      const totalPrice = parseFloat(room.price) * nights + 10;
+      
+      updateBooking({ totalPrice });
+      setShowSuccess(true);
+    }
+  };
 
   // Thêm dữ liệu các địa điểm lân cận
   const nearbyPlaces = [
@@ -389,14 +415,26 @@ const RoomDetail = () => {
                   </div>
                 </div>
 
-                <Form>
+                <Form onSubmit={handleSubmit}>
                   <Row className="g-2 mb-3">
                     <Col>
                       <Form.Group>
                         <Form.Label className="small fw-bold">
                           NHẬN PHÒNG
                         </Form.Label>
-                        <Form.Control type="date" className="rounded-3" />
+                        <Form.Control 
+                          type="date" 
+                          className="rounded-3"
+                          name="checkInDate"
+                          value={bookingData.checkInDate}
+                          onChange={handleInputChange}
+                          min={new Date().toISOString().split('T')[0]}
+                        />
+                        {errors.checkInDate && (
+                          <Form.Text className="text-danger">
+                            {errors.checkInDate}
+                          </Form.Text>
+                        )}
                       </Form.Group>
                     </Col>
                     <Col>
@@ -404,31 +442,62 @@ const RoomDetail = () => {
                         <Form.Label className="small fw-bold">
                           TRẢ PHÒNG
                         </Form.Label>
-                        <Form.Control type="date" className="rounded-3" />
+                        <Form.Control 
+                          type="date" 
+                          className="rounded-3"
+                          name="checkOutDate"
+                          value={bookingData.checkOutDate}
+                          onChange={handleInputChange}
+                          min={bookingData.checkInDate || new Date().toISOString().split('T')[0]}
+                        />
+                        {errors.checkOutDate && (
+                          <Form.Text className="text-danger">
+                            {errors.checkOutDate}
+                          </Form.Text>
+                        )}
                       </Form.Group>
                     </Col>
                   </Row>
 
                   <Form.Group className="mb-4">
                     <Form.Label className="small fw-bold">KHÁCH</Form.Label>
-                    <Form.Select className="rounded-3">
-                      <option>1 khách</option>
-                      <option>2 khách</option>
+                    <Form.Select 
+                      className="rounded-3"
+                      name="guests"
+                      value={bookingData.guests}
+                      onChange={handleInputChange}
+                    >
+                      <option value="1">1 khách</option>
+                      <option value="2">2 khách</option>
                     </Form.Select>
+                    {errors.guests && (
+                      <Form.Text className="text-danger">
+                        {errors.guests}
+                      </Form.Text>
+                    )}
                   </Form.Group>
 
                   <Button
                     variant="primary"
                     className="w-100 py-3 mb-3 rounded-3"
+                    type="submit"
                   >
                     Đặt phòng ngay
                   </Button>
                 </Form>
 
+                {showSuccess && (
+                  <div className="alert alert-success">
+                    Đặt phòng thành công! Tổng tiền: ${bookingData.totalPrice}
+                  </div>
+                )}
+
                 <div className="border-top pt-3">
                   <div className="d-flex justify-content-between mb-2">
-                    <span>$100 x 1 đêm</span>
-                    <span>${room.price}</span>
+                    <span>${room.price} x {bookingData.checkInDate && bookingData.checkOutDate ? 
+                      Math.ceil((new Date(bookingData.checkOutDate) - new Date(bookingData.checkInDate)) / (1000 * 60 * 60 * 24)) : 1} đêm</span>
+                    <span>${bookingData.checkInDate && bookingData.checkOutDate ? 
+                      parseFloat(room.price) * Math.ceil((new Date(bookingData.checkOutDate) - new Date(bookingData.checkInDate)) / (1000 * 60 * 60 * 24)) : parseFloat(room.price)}</span>
                   </div>
                   <div className="d-flex justify-content-between mb-2">
                     <span>Phí dịch vụ</span>
@@ -436,7 +505,8 @@ const RoomDetail = () => {
                   </div>
                   <div className="d-flex justify-content-between fw-bold mt-3 pt-3 border-top">
                     <span>Tổng tiền</span>
-                    <span>${parseFloat(room.price) + 10}</span>
+                    <span>${bookingData.checkInDate && bookingData.checkOutDate ? 
+                      parseFloat(room.price) * Math.ceil((new Date(bookingData.checkOutDate) - new Date(bookingData.checkInDate)) / (1000 * 60 * 60 * 24)) + 10 : parseFloat(room.price) + 10}</span>
                   </div>
                 </div>
               </Card.Body>

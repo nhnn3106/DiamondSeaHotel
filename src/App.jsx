@@ -1,4 +1,3 @@
-
 // import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -15,26 +14,29 @@ import Register from "./pages/Register";
 import AuthProvider from "./hooks/AuthProvider";
 import Profile from "./pages/Profile";
 import RoomDetail from './components/RoomDetail';
+import { BookingProvider } from "./context/BookingContext";
 
 function App() {
   return (
     <AuthProvider>
       <NavigateProvider>
         <RoomTypeProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route element={<MainLayout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/hotelhot" element={<HotelHot />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/room/:id" element={<RoomDetail />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
+          <BookingProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route element={<MainLayout />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/hotelhot" element={<HotelHot />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/room/:id" element={<RoomDetail />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </BookingProvider>
         </RoomTypeProvider>
       </NavigateProvider>
     </AuthProvider>
