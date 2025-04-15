@@ -1,3 +1,4 @@
+
 import { useContext, useState } from "react";
 import Header from "../components/Header";
 import RoomList from "../components/RoomList";
@@ -18,3 +19,4 @@ const Home = () => {
 };
 
 export default Home;
+

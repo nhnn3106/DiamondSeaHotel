@@ -20,7 +20,7 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   };
 
   const handleCardClick = () => {
-    navigate(`/room/${roomId}`);
+    navigate(`/room/${id}`);
   };
 
   return (
