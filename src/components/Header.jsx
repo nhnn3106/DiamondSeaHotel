@@ -13,11 +13,14 @@ import UserActions from "./UserActions";
 import SearchbarFiller from "./SearchbarFiller";
 import FilterBar from "./FilterBar"; // Import FilterBar component
 import { Link } from "react-router-dom";
-import { RoomTypeContext } from "../hooks/RoomTypeProvider";
+import { RoomTypeContext } from "../hooks/RoomProvider";
+import { useLocation } from "react-router-dom";
 import { NavigateContext } from "../hooks/NavigateProvider";
 
 const Header = () => {
   const { paths } = useContext(NavigateContext);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const { searchData, updateSearchData, filters, setFilters } =
     useContext(RoomTypeContext);
@@ -27,6 +30,7 @@ const Header = () => {
   const rafId = useRef(null);
   const isScrolling = useRef(false);
   const headerRef = useRef(null);
+
   // Xử lý click bên ngoài để đóng SearchFiller
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -52,9 +56,11 @@ const Header = () => {
         className={` ${!showSearchFiller ? "border-bottom" : ""}`}
         style={{ padding: "35px 0px" }}
       >
-        <Container className="ms-5" style={{ paddingRight: "500px" }}>
+        <Container className="ms-5" style={{ paddingRight: "0" }}>
           <Navbar.Brand>
-            <Logo />
+            <Link to="/">
+              <Logo />
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -89,7 +95,7 @@ const Header = () => {
         </Container>
         <Container
           className="position-relative"
-          style={{ marginLeft: "-500px" }}
+          style={{ marginLeft: "-105px" }}
         >
           {!showSearchFiller && (
             <SearchBar
@@ -99,7 +105,7 @@ const Header = () => {
             />
           )}
         </Container>
-        <Container className="me-5" style={{ width: "900px" }}>
+        <Container className="me-5" style={{ width: "max-content" }}>
           <div
             className="btn-item p-2 fw-semibold"
             style={{ width: "max-content" }}
@@ -113,8 +119,9 @@ const Header = () => {
         </Container>
       </Navbar>
       <Navbar
-        className={`search-bar-filler position-relative ${showSearchFiller ? "fade-in d-block border-bottom" : "fade-out d-none"
-          }`}
+        className={`search-bar-filler position-relative ${
+          showSearchFiller ? "fade-in d-block border-bottom" : "fade-out d-none"
+        }`}
         style={{ zIndex: 2 }}
       >
         <Container className="d-flex justify-content-center">
@@ -127,14 +134,16 @@ const Header = () => {
           />
         </Container>
       </Navbar>
-      <Navbar
-        className="filter-bar border-bottom py-3 bg-white"
-        style={{ zIndex: 1 }}
-      >
-        <Container className="d-flex justify-content-center">
-          <FilterBar />
-        </Container>
-      </Navbar>
+      {isHomePage && (
+        <Navbar
+          className="filter-bar border-bottom py-3 bg-white"
+          style={{ zIndex: 1 }}
+        >
+          <Container className="d-flex justify-content-center">
+            <FilterBar />
+          </Container>
+        </Navbar>
+      )}
     </div>
   );
 };

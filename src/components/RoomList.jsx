@@ -2,11 +2,19 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import RoomCard from "./RoomCard";
 
-const RoomList = () => {
+const RoomList = ({ rooms }) => {
   return (
     <Container className="d-flex flex-wrap justify-content-center">
-      {Array.from({ length: 20 }).map((val, index) => (
-        <RoomCard key={index} />
+      {rooms.map((room) => (
+        <RoomCard
+          key={room.roomID}
+          id={room.roomID}
+          price={room.price}
+          bedType={room.bedType}
+          bedCount={room.bedCount}
+          location={room.location}
+          images={room.images}
+        />
       ))}
     </Container>
   );

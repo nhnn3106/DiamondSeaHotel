@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Search } from "lucide-react";
-import { RoomTypeContext } from "../hooks/RoomTypeProvider";
+import { RoomTypeContext } from "../hooks/RoomProvider";
 
 const SearchBar = ({
   showSearchFiller,

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import LocationDropdown from "./LocationDropdown";
 import CheckDateDropdown from "./CheckDateDropdown";
 import GuestDropdown from "./GuestDropdown";
-import { RoomTypeContext } from "../hooks/RoomTypeProvider";
+import { RoomTypeContext } from "../hooks/RoomProvider";
 
 const SearchbarFiller = ({
   setShowSearchFiller,

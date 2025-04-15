@@ -1,15 +1,84 @@
 import express from "express";
 import mariadb from 'mariadb';
-
+import  cors from "cors";
 const app = express();
 
 // Cấu hình kết nối MariaDB
 const pool = mariadb.createPool({
     host: 'localhost',
     user: 'root',
-    password: '12y34567',
+    password: '12345',
     database: 'db',
     connectionLimit: 5
+});
+
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  }));
+
+
+// API trả về danh sách tiện nghi
+app.get("/amenities", async (req, res) => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+
+        const query = `
+            SELECT * FROM amenities
+        `;
+
+        const rows = await connection.query(query);
+
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json(error.message);
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+
+
+// API trả về danh sách tiện nghi
+app.get("/services", async (req, res) => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+
+        const query = `
+            SELECT * FROM services
+        `;
+
+        const rows = await connection.query(query);
+
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json(error.message);
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+// API trả về danh sách loại phòng
+app.get("/roomtypes", async (req, res) => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+
+        const query = `
+            SELECT roomTypeID, NAME, pathImg FROM roomtypes
+        `;
+
+        const rows = await connection.query(query);
+
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json(error.message);
+    } finally {
+        if (connection) connection.release();
+    }
 });
 
 // API trả về danh sách phòng kèm loại phòng và hình ảnh và services name và amenities name
@@ -19,21 +88,15 @@ app.get("/rooms", async (req, res) => {
         connection = await pool.getConnection();
 
         const query = `
-            SELECT r.roomID, r.name, r.price, r.dienTich, r.soNguoi, r.bedType, r.bedCount, r.danhGia, r.moTa, r.location,
-                   rt.name AS roomTypeName,
-                   ri.pathImg,
-                   s.serviceID, s.name AS serviceName,
-                   a.amenityID, a.name AS amenityName
-
-            FROM Rooms r
-            LEFT JOIN RoomTypes rt ON r.roomTypeID = rt.roomTypeID
-            LEFT JOIN RoomImages ri ON r.roomID = ri.roomID
-            LEFT JOIN Room_Service rs ON r.roomID = rs.roomID
-            LEFT JOIN Services s ON rs.serviceID = s.serviceID
-            LEFT JOIN Room_Amenity ra ON r.roomID = ra.roomID
-            LEFT JOIN Amenities a ON ra.amenityID = a.amenityID
-
-            ORDER BY r.roomID, ri.imageID
+            SELECT r.roomID, r.price, r.bedType, r.bedCount, location,
+	               rt.name AS roomTypeName,
+		           ri.imageID, ri.pathImg, 
+		           s.serviceID AS serviceID, s.name AS serviceName,
+		           a.amenityID AS amenityID, a.name AS amenityName  
+            FROM rooms r   JOIN roomtypes rt ON r.roomTypeID=rt.roomTypeID 
+                           JOIN roomimages ri ON r.roomID=ri.roomID
+                           JOIN room_service rs ON r.roomID=rs.roomID JOIN services s ON rs.serviceID=s.serviceID
+                           JOIN room_amenity ra ON r.roomID=ra.roomID JOIN amenities a ON ra.amenityID=a.amenityID
         `;
 
         const rows = await connection.query(query);
@@ -43,35 +106,32 @@ app.get("/rooms", async (req, res) => {
             if (!roomsMap.has(row.roomID)) {
                 roomsMap.set(row.roomID, {
                     roomID: row.roomID,
-                    name: row.name,
                     price: row.price,
-                    dienTich: row.dienTich,
-                    soNguoi: row.soNguoi,
                     bedType: row.bedType,
                     bedCount: row.bedCount,
-                    danhGia: row.danhGia,
-                    moTa: row.moTa,
                     location: row.location,
-                    roomType: [row.roomTypeName],
+                    roomTypeName: row.roomTypeName,
                     images: [],
                     services: [],
                     amenities: []
                 });
             }
 
+            const room = roomsMap.get(row.roomID);
+
             // Thêm hình ảnh nếu chưa có
-            if (row.pathImg && !roomsMap.get(row.roomID).images.includes(row.pathImg)) {
-                roomsMap.get(row.roomID).images.push(row.pathImg);
+            if (row.pathImg && !room.images.some(img => img.imageID === row.imageID)) {
+                room.images.push({ imageID: row.imageID, pathImg: row.pathImg });
             }
 
             // Thêm service name nếu chưa có
-            if (row.serviceName && !roomsMap.get(row.roomID).services.includes(row.serviceName)) {
-                roomsMap.get(row.roomID).services.push(row.serviceName);
+            if (row.serviceName && !room.services.includes(row.serviceName)) {
+                room.services.push(row.serviceName);
             }
 
             // Thêm amenity name nếu chưa có
-            if (row.amenityName && !roomsMap.get(row.roomID).amenities.includes(row.amenityName)) {
-                roomsMap.get(row.roomID).amenities.push(row.amenityName);
+            if (row.amenityName && !room.amenities.includes(row.amenityName)) {
+                room.amenities.push(row.amenityName);
             }
         });
 
@@ -84,6 +144,7 @@ app.get("/rooms", async (req, res) => {
         if (connection) connection.release();
     }
 });
+
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");

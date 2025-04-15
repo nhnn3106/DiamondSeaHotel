@@ -3,8 +3,10 @@ import { Card, Carousel } from "react-bootstrap";
 import { Heart } from "lucide-react"; // Sử dụng biểu tượng trái tim từ lucide-react
 import room1 from "../assets/roomImages/room-1.png";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const RoomCard = () => {
+const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
+  const navigate = useNavigate();
   // Số lượng hình ảnh trong Carousel (minh họa 3 hình ảnh)
   const imageCount = 3;
 
@@ -12,18 +14,26 @@ const RoomCard = () => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   // Hàm xử lý khi ấn vào trái tim
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation(); // Ngăn sự kiện click lan ra card
     setIsFavorite(!isFavorite);
+  };
+
+  const handleCardClick = () => {
+    navigate(`/room/${roomId}`);
   };
 
   return (
     <Card
+      id={id}
       style={{
         width: "18rem",
         borderRadius: "12px", // Bo góc 12px cho Card
         overflow: "visible", // Đảm bảo không cắt xén các góc
+        cursor: "pointer",
       }}
       className="room-card border m-4"
+      onClick={handleCardClick} // Thêm sự kiện click vào card
     >
       {/* Carousel với biểu tượng trái tim */}
       <div style={{ position: "relative", overflow: "visible" }}>
@@ -34,9 +44,9 @@ const RoomCard = () => {
           className="custom-carousel"
           style={{ borderRadius: "12px", overflow: "visible" }} // Đảm bảo Carousel không cắt xén
         >
-          {Array.from({ length: imageCount }).map((_, index) => (
+          {images.map((img) => (
             <Carousel.Item
-              key={index}
+              key={img.imageID}
               style={{ borderRadius: "12px", overflow: "visible" }}
             >
               <img
@@ -48,7 +58,8 @@ const RoomCard = () => {
                   objectPosition: "center", // Đảm bảo hình ảnh hiển thị đúng với bo góc
                   display: "block", // Loại bỏ khoảng trống dưới hình ảnh
                 }}
-                src={room1}
+                loading="lazy"
+                src={img.pathImg}
                 alt=""
               />
             </Carousel.Item>
@@ -64,13 +75,13 @@ const RoomCard = () => {
       {/* Nội dung thẻ */}
       <Card.Body className="p-3" style={{ padding: "10px 0" }}>
         <Card.Title style={{ fontSize: "16px", fontWeight: "bold" }}>
-          Koutsounari, HY Lạp
+          {location}
         </Card.Title>
         <Card.Text style={{ fontSize: "14px", color: "#6c757d" }}>
-          3 giường - 3 phòng ngủ
+          {`${bedCount} giường ${bedType}`}
         </Card.Text>
         <Card.Text style={{ fontSize: "14px", fontWeight: "bold" }}>
-          đ262.560.283 / tháng
+          ${price}
         </Card.Text>
       </Card.Body>
     </Card>

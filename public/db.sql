@@ -113,6 +113,41 @@ INSERT INTO Rooms (roomID, name, price, dienTich, soNguoi, bedType, bedCount, ro
 (19, 'Deluxe Room 205', 200.00, 35.0, 3, 'Queen', 1, 2, 4.6, 'Chic deluxe room', 'Floor 2'),
 (20, 'Deluxe Room 206', 200.00, 35.0, 3, 'Queen', 1, 2, 4.7, 'Modern deluxe room', 'Floor 2');
 
+UPDATE Rooms
+SET location = CASE
+    -- Room IDs 1-4: United States
+    WHEN roomID = 1 THEN '123 Main Street, New York, United States'
+    WHEN roomID = 2 THEN '456 Oak Avenue, Los Angeles, United States'
+    WHEN roomID = 3 THEN '789 Pine Road, Chicago, United States'
+    WHEN roomID = 4 THEN '101 Maple Lane, Houston, United States'
+
+    -- Room IDs 5-7: South Korea
+    WHEN roomID = 5 THEN '12 Gangnam Street, Seoul, South Korea'
+    WHEN roomID = 6 THEN '34 Itaewon Road, Busan, South Korea'
+    WHEN roomID = 7 THEN '56 Myeongdong Avenue, Incheon, South Korea'
+
+    -- Room IDs 8-10: Australia
+    WHEN roomID = 8 THEN '78 Collins Street, Melbourne, Australia'
+    WHEN roomID = 9 THEN '90 George Street, Sydney, Australia'
+    WHEN roomID = 10 THEN '11 Queen Street, Brisbane, Australia'
+
+    -- Room IDs 11-13: Thailand
+    WHEN roomID = 11 THEN '22 Sukhumvit Road, Bangkok, Thailand'
+    WHEN roomID = 12 THEN '33 Chiang Mai Street, Chiang Mai, Thailand'
+    WHEN roomID = 13 THEN '44 Phuket Avenue, Phuket, Thailand'
+
+    -- Room IDs 14-16: France
+    WHEN roomID = 14 THEN '55 Champs-Élysées, Paris, France'
+    WHEN roomID = 15 THEN '66 Rue de Rivoli, Lyon, France'
+    WHEN roomID = 16 THEN '77 Avenue Montaigne, Nice, France'
+
+    -- Room IDs 17-20: Italy
+    WHEN roomID = 17 THEN '88 Via Roma, Rome, Italy'
+    WHEN roomID = 18 THEN '99 Via Veneto, Venice, Italy'
+    WHEN roomID = 19 THEN '111 Via Dante, Milan, Italy'
+    WHEN roomID = 20 THEN '222 Via Toledo, Naples, Italy'
+END;
+
 -- Insert 5 images per room (100 images total)
 INSERT INTO RoomImages (roomID, imageID, pathImg) VALUES
 -- Room 1
@@ -226,3 +261,62 @@ INSERT INTO Orders (orderID, price, roomID, orderDate, checkInDate, checkOutDate
 (3, 350.00, 5, '2025-04-12', '2025-04-25', '2025-04-28', 2, 'Suite booking'),
 (4, 250.00, 7, '2025-04-13', '2025-05-01', '2025-05-03', 2, 'Family booking');
 
+
+UPDATE Rooms
+SET location = CASE
+    -- Room IDs 1-4: United States
+    WHEN roomID = 1 THEN '123 Main Street, New York, United States'
+    WHEN roomID = 2 THEN '456 Oak Avenue, Los Angeles, United States'
+    WHEN roomID = 3 THEN '789 Pine Road, Chicago, United States'
+    WHEN roomID = 4 THEN '101 Maple Lane, Houston, United States'
+
+    -- Room IDs 5-7: South Korea
+    WHEN roomID = 5 THEN '12 Gangnam Street, Seoul, South Korea'
+    WHEN roomID = 6 THEN '34 Itaewon Road, Busan, South Korea'
+    WHEN roomID = 7 THEN '56 Myeongdong Avenue, Incheon, South Korea'
+
+    -- Room IDs 8-10: Australia
+    WHEN roomID = 8 THEN '78 Collins Street, Melbourne, Australia'
+    WHEN roomID = 9 THEN '90 George Street, Sydney, Australia'
+    WHEN roomID = 10 THEN '11 Queen Street, Brisbane, Australia'
+
+    -- Room IDs 11-13: Thailand
+    WHEN roomID = 11 THEN '22 Sukhumvit Road, Bangkok, Thailand'
+    WHEN roomID = 12 THEN '33 Chiang Mai Street, Chiang Mai, Thailand'
+    WHEN roomID = 13 THEN '44 Phuket Avenue, Phuket, Thailand'
+
+    -- Room IDs 14-16: France
+    WHEN roomID = 14 THEN '55 Champs-Élysées, Paris, France'
+    WHEN roomID = 15 THEN '66 Rue de Rivoli, Lyon, France'
+    WHEN roomID = 16 THEN '77 Avenue Montaigne, Nice, France'
+
+    WHEN roomID = 17 THEN '88 Via Roma, Rome, France'
+    WHEN roomID = 18 THEN '99 Via Veneto, Venice, United States'
+    WHEN roomID = 19 THEN '111 Via Dante, Milan, Thailand'
+    WHEN roomID = 20 THEN '222 Via Toledo, Naples, Australia'
+END;
+
+
+
+SELECT roomTypeID, name, pathImg FROM roomtypes
+
+
+SELECT location FROM rooms
+
+SELECT * FROM amenities
+SELECT * FROM services
+
+
+SELECT r.roomID, r.price, r.bedType, r.bedCount, location,
+	    r.roomTypeID, rt.`name` AS roomTypeName ,
+		 ri.imageID, ri.pathImg, 
+		 s.serviceID AS serviceID, s.`name` AS serviceName,
+		 a.amenityID AS amenityID, a.`name` AS amenityName  
+FROM rooms r   JOIN roomtypes rt ON r.roomTypeID=rt.roomTypeID 
+					JOIN roomimages ri ON r.roomID=ri.roomID
+					JOIN room_service rs ON r.roomID=rs.roomID JOIN services s ON rs.serviceID=s.serviceID
+					JOIN room_amenity ra ON r.roomID=ra.roomID JOIN amenities a ON ra.amenityID=a.amenityID
+					
+					
+					
+SELECT * FROM amenities

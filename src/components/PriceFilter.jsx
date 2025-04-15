@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { RoomTypeContext } from "../hooks/RoomProvider";
 
-const PriceFilter = ({ priceRange, setPriceRange }) => {
+const PriceFilter = () => {
+  const { filters, setPriceRange } = useContext(RoomTypeContext);
+
   const [range, setRange] = useState({
     min: 0,
     max: 600,
@@ -8,8 +11,8 @@ const PriceFilter = ({ priceRange, setPriceRange }) => {
 
   // Sync range with priceRange from props
   useEffect(() => {
-    setRange({ min: priceRange[0], max: priceRange[1] });
-  }, [priceRange]);
+    setRange({ min: filters.priceRange[0], max: filters.priceRange[1] });
+  }, [filters.priceRange]);
 
   const handleMinChange = (e) => {
     const min = parseInt(e.target.value);
@@ -34,7 +37,7 @@ const PriceFilter = ({ priceRange, setPriceRange }) => {
   const maxPos = (range.max / 1000) * 100;
 
   return (
-    <>
+    <div className="filter-item d-flex flex-column">
       <div className="d-flex justify-content-between mb-2">
         <span style={{ color: "#222", fontWeight: "bold" }}>{range.min} $</span>
         <span style={{ color: "#222", fontWeight: "bold" }}>{range.max} $</span>
@@ -102,7 +105,7 @@ const PriceFilter = ({ priceRange, setPriceRange }) => {
           }}
         />
       </div>
-    </>
+    </div>
   );
 };
 
