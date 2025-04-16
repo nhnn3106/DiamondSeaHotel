@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useBooking } from "../context/BookingContext";
 import {
@@ -42,9 +42,15 @@ const RoomDetail = () => {
   const { id = 2 } = useParams();
   const { bookingData, updateBooking, errors, validateBooking } = useBooking();
   const [showSuccess, setShowSuccess] = useState(false);
+  const initialRender = useRef(true);
+
+  console.log(bookingData);
 
   useEffect(() => {
-    updateBooking({ roomId: parseInt(id) });
+    if (initialRender.current) {
+      updateBooking({ roomId: parseInt(id) });
+      initialRender.current = false;
+    }
   }, [id, updateBooking]);
 
   const handleInputChange = (e) => {
@@ -488,7 +494,7 @@ const RoomDetail = () => {
 
                 {showSuccess && (
                   <div className="alert alert-success">
-                    Đặt phòng thành công! Tổng tiền: ${bookingData.totalPrice}
+                     Tổng tiền: ${bookingData.totalPrice}
                   </div>
                 )}
 

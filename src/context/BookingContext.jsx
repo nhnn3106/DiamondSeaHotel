@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 const BookingContext = createContext();
@@ -14,7 +14,7 @@ export const BookingProvider = ({ children }) => {
 
   const [errors, setErrors] = useState({});
 
-  const validateBooking = (data) => {
+  const validateBooking = useCallback((data) => {
     const newErrors = {};
     
     if (!data.checkInDate) {
@@ -33,14 +33,14 @@ export const BookingProvider = ({ children }) => {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  }, []);
 
-  const updateBooking = (newData) => {
+  const updateBooking = useCallback((newData) => {
     setBookingData(prev => ({
       ...prev,
       ...newData
     }));
-  };
+  }, []);
 
   console.log('BookingProvider mounted');
 
