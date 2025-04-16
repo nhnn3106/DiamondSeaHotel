@@ -134,7 +134,7 @@ const Header = () => {
           />
         </Container>
       </Navbar>
-      {isHomePage && (
+      {
         <Navbar
           className="filter-bar border-bottom py-3 bg-white"
           style={{ zIndex: 1 }}
@@ -143,7 +143,7 @@ const Header = () => {
             <FilterBar />
           </Container>
         </Navbar>
-      )}
+      }
     </div>
   );
 };
