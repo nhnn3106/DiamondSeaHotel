@@ -1,4 +1,3 @@
-
 import { createContext, useEffect, useState } from "react";
 import anyWhere from "../assets/location/any-where.png";
 import austrialia from "../assets/location/austrialia.png";
@@ -150,6 +149,8 @@ const RoomTypeProvider = ({ children }) => {
       return { ...prev, services: updatedServices };
     });
   };
+
+  const filteredRooms = rooms.filter((room) => {});
 
   return (
     <RoomTypeContext.Provider
