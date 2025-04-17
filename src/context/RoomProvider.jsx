@@ -48,6 +48,7 @@ const RoomTypeProvider = ({ children }) => {
   const [roomTypes, setRoomTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [currentRoom, setCurentRoom] = useState(null);
 
   // Danh sách tiện nghi với icon
   const [availableAmenities, setAvailableAmenities] = useState([]);
@@ -117,7 +118,6 @@ const RoomTypeProvider = ({ children }) => {
     fetchAmenities();
     fetchServices();
     fetchRooms();
-    console.log(rooms);
   }, []);
 
   // Xử lý thay đổi loại phòng
@@ -191,7 +191,10 @@ const RoomTypeProvider = ({ children }) => {
     );
   });
 
-  console.log(filteredRooms);
+  const handleClickRoom = (roomID) => {
+    const selectedRoom = rooms.find(room => room.roomID === roomID);
+    setCurentRoom(selectedRoom);
+  }
 
   return (
     <RoomTypeContext.Provider
@@ -208,6 +211,8 @@ const RoomTypeProvider = ({ children }) => {
         handlePriceChange,
         handleAmenityChange,
         handleServiceChange,
+        handleClickRoom,
+        currentRoom,
         rooms,
         isLoading,
         error,

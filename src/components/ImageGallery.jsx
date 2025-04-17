@@ -15,14 +15,12 @@ const SAVE_BUTTON_TEXT = "Lưu";
 const SHARE_TOOLTIP_TEXT = "Chia sẻ địa điểm này";
 const SAVE_TOOLTIP_TEXT = "Lưu vào danh sách yêu thích";
 
-function ImageGallery({hotel}) {
+function ImageGallery({room}) {
   const renderTooltip = (props, tooltipText) => (
     <Tooltip id={`tooltip-${tooltipText.replace(/\s+/g, "-")}`} {...props}>
       {tooltipText}
     </Tooltip>
   );
-
-  const thumbnailImages = [hotel.images.thumb1, hotel.images.thumb2, hotel.images.thumb3, hotel.images.thumb4];
 
   return (
     <div className="image-gallery">
@@ -31,7 +29,7 @@ function ImageGallery({hotel}) {
           <Col>
             <h2 className="header-title">
               <Translate className="translate-icon" size={24} />
-              <span>{hotel.name}</span>
+              <span>{room.name}</span>
             </h2>
           </Col>
           <Col xs="auto" className="ms-auto ps-md-3">
@@ -68,7 +66,7 @@ function ImageGallery({hotel}) {
         <Row className="g-2">
           <Col md={6} className="main-image-col">
             <Image
-              src={hotel.images.main}
+              src={room.images[0].pathImg}
               fluid
               rounded
               className="h-100 gallery-image"
@@ -76,10 +74,10 @@ function ImageGallery({hotel}) {
           </Col>
           <Col md={6}>
             <Row className="g-2">
-              {thumbnailImages.map((imgSrc, index) => (
-                 <Col xs={6} key={index} className={index === 3 ? "position-relative" : ""}>
+              {room.images.slice(1, 5).map((image, index) => (
+                 <Col xs={6} key={image.imageID} className={index === 3 ? "position-relative" : ""}>
                    <Image
-                     src={imgSrc}
+                     src={image.pathImg}
                      fluid
                      rounded
                      className="gallery-image thumbnail-image"

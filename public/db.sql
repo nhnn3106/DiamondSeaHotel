@@ -45,6 +45,10 @@ CREATE TABLE Orders (
     checkInDate DATE,
     checkOutDate DATE,
     accountID INT,
+    name NVARCHAR(100),
+    sdt NVARCHAR(20),
+    email NVARCHAR(100),
+    type NVARCHAR(100),
     attribute NVARCHAR(255),
     FOREIGN KEY (roomID) REFERENCES Rooms(roomID),
     FOREIGN KEY (accountID) REFERENCES Accounts(accountID)
@@ -254,14 +258,6 @@ INSERT INTO Room_Amenity (roomID, amenityID) VALUES
 (19, 1), (19, 2), (19, 3), (19, 4), (19, 5),
 (20, 1), (20, 2), (20, 3), (20, 4);
 
--- Insert Orders (1 for account 1, 3 for account 2)
-INSERT INTO Orders (orderID, price, roomID, orderDate, checkInDate, checkOutDate, accountID, attribute) VALUES
-(1, 100.00, 1, '2025-04-10', '2025-04-15', '2025-04-17', 1, 'Standard booking'),
-(2, 200.00, 3, '2025-04-11', '2025-04-20', '2025-04-22', 2, 'Deluxe booking'),
-(3, 350.00, 5, '2025-04-12', '2025-04-25', '2025-04-28', 2, 'Suite booking'),
-(4, 250.00, 7, '2025-04-13', '2025-05-01', '2025-05-03', 2, 'Family booking');
-
-
 UPDATE Rooms
 SET location = CASE
     -- Room IDs 1-4: United States
@@ -298,25 +294,3 @@ END;
 
 
 
-SELECT roomTypeID, name, pathImg FROM roomtypes
-
-
-SELECT location FROM rooms
-
-SELECT * FROM amenities
-SELECT * FROM services
-
-
-SELECT r.roomID, r.price, r.bedType, r.bedCount, location,
-	    r.roomTypeID, rt.`name` AS roomTypeName ,
-		 ri.imageID, ri.pathImg, 
-		 s.serviceID AS serviceID, s.`name` AS serviceName,
-		 a.amenityID AS amenityID, a.`name` AS amenityName  
-FROM rooms r   JOIN roomtypes rt ON r.roomTypeID=rt.roomTypeID 
-					JOIN roomimages ri ON r.roomID=ri.roomID
-					JOIN room_service rs ON r.roomID=rs.roomID JOIN services s ON rs.serviceID=s.serviceID
-					JOIN room_amenity ra ON r.roomID=ra.roomID JOIN amenities a ON ra.amenityID=a.amenityID
-					
-					
-					
-SELECT * FROM amenities

@@ -4,9 +4,12 @@ import { Heart } from "lucide-react"; // Sử dụng biểu tượng trái tim t
 import room1 from "../assets/roomImages/room-1.png";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { RoomTypeContext } from "../context/RoomProvider";
+import { useContext } from "react";
 
 const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   const navigate = useNavigate();
+  const {handleClickRoom} = useContext(RoomTypeContext);
   // Số lượng hình ảnh trong Carousel (minh họa 3 hình ảnh)
   const imageCount = 3;
 
@@ -16,10 +19,12 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   // Hàm xử lý khi ấn vào trái tim
   const handleFavoriteClick = (e) => {
     e.stopPropagation(); // Ngăn sự kiện click lan ra card
+    
     setIsFavorite(!isFavorite);
   };
 
   const handleCardClick = () => {
+    handleClickRoom(id);
     navigate(`/room/${id}`);
   };
 

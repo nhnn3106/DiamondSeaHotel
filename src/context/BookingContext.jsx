@@ -66,4 +66,6 @@ export const useBooking = () => {
     console.log('useBooking must be used within a BookingProvider');
   }
   return context;
-}; 
+};
+
+export default BookingContext; 
