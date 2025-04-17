@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { use } from 'react';
 
 const BookingContext = createContext();
 
@@ -58,14 +59,6 @@ export const BookingProvider = ({ children }) => {
 
 BookingProvider.propTypes = {
   children: PropTypes.node.isRequired,
-};
-
-export const useBooking = () => {
-  const context = useContext(BookingContext);
-  if (!context) {
-    console.log('useBooking must be used within a BookingProvider');
-  }
-  return context;
 };
 
 export default BookingContext; 

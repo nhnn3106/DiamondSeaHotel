@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useBooking } from "../context/BookingContext";
+import BookingContext from "../context/BookingContext";
 import { RoomTypeContext } from "../context/RoomProvider";
+import { AuthContext } from "../context/AuthProvider";
 import { useContext } from "react";
 
 import {
@@ -42,9 +43,17 @@ L.Icon.Default.mergeOptions({
 
 const RoomDetail = () => {
   const { id } = useParams();
-  const { bookingData, updateBooking, errors, validateBooking } = useBooking();
+  const { isVerify } = useContext(AuthContext);
+  const { bookingData, updateBooking, errors, validateBooking } = useContext(BookingContext);
   const navigate = useNavigate();
-  const { currentRoom } = useContext(RoomTypeContext);
+  const { currentRoom, handleClickRoom } = useContext(RoomTypeContext);
+
+  // Load room data when component mounts or ID changes
+  useEffect(() => {
+    if (id) {
+      handleClickRoom(parseInt(id));
+    }
+  }, [id, handleClickRoom]);
 
   if (!currentRoom) {
     return (
@@ -120,6 +129,11 @@ const RoomDetail = () => {
 
   // Xử lý submit form
   const handleSubmit = (e) => {
+    if (!isVerify) {
+      alert("Vui lòng đăng nhập trên trang chủ");
+      navigate("/login");
+      return;
+    }
     e.preventDefault();
     if (!currentRoom) return;
 

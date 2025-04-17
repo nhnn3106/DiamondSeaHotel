@@ -7,8 +7,9 @@ const MainLayout = () => {
   return (
     <>
       <Header />
-      <section style={{ marginTop: "220px" }}>
+      <section style={{ marginTop: "120px" }}>
         <Outlet />
+        
       </section>
       <Footer />
     </>

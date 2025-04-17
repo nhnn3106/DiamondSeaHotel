@@ -11,6 +11,7 @@ const api = axios.create({
 });
 
 export const AuthProvider = ({ children }) => {
+    const [isVerify, setIsVerify] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
                 // Cập nhật state
                 setUser(userData);
                 setIsAuthenticated(true);
-
+                setIsVerify(true);
                 return { success: true };
             } else {
                 return {
@@ -110,7 +111,8 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         register,
-        updateUser
+        updateUser,
+        isVerify
     };
 
     return (

@@ -58,9 +58,7 @@ const Header = () => {
       >
         <Container className="ms-5" style={{ paddingRight: "0" }}>
           <Navbar.Brand>
-            <Link to="/">
               <Logo />
-            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -79,23 +77,12 @@ const Header = () => {
               >
                 Contact
               </Link>
-              <Link
-                style={{ marginRight: "100px" }}
-                to={paths.hotelhot}
-                className="btn-item p-2 fw-semibold text-black text-decoration-none"
-              >
-                <span
-                  style={{ color: "red", fontWeight: "bold", fontSize: "20px" }}
-                >
-                  Hot
-                </span>
-              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
         <Container
           className="position-relative"
-          style={{ marginLeft: "-105px" }}
+          style={{ marginLeft: "-250px" }}
         >
           {!showSearchFiller && (
             <SearchBar
@@ -106,12 +93,17 @@ const Header = () => {
           )}
         </Container>
         <Container className="me-5" style={{ width: "max-content" }}>
-          <div
-            className="btn-item p-2 fw-semibold"
-            style={{ width: "max-content" }}
-          >
-            Cho thuê chỗ ở qua Airbnb
-          </div>
+        <Link
+                style={{ marginRight: "100px" }}
+                to={paths.hotelhot}
+                className="btn-item p-2 fw-semibold text-black text-decoration-none"
+              >
+                <span
+                  style={{ color: "red", fontWeight: "bold", fontSize: "20px" }}
+                >
+                  Hot
+                </span>
+              </Link>
           <div className="btn-item p-2 d-flex justify-content-center align-items-center">
             <Globe size={19} />
           </div>
@@ -134,16 +126,6 @@ const Header = () => {
           />
         </Container>
       </Navbar>
-      {
-        <Navbar
-          className="filter-bar border-bottom py-3 bg-white"
-          style={{ zIndex: 1 }}
-        >
-          <Container className="d-flex justify-content-center">
-            <FilterBar />
-          </Container>
-        </Navbar>
-      }
     </div>
   );
 };

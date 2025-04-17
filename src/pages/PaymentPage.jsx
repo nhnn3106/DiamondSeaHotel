@@ -494,7 +494,7 @@ const PaymentPage = () => {
                 className="modal-button"
                 onClick={() => {
                   setShowModal(false);
-                  navigate('/BookingHistory'); 
+                  navigate('/'); 
                 }}
               >
                 Hoàn tất <i className="fas fa-arrow-right"></i>

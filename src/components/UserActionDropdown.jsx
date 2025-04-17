@@ -25,7 +25,7 @@ const UserActionDropdown = () => {
       <ul className="user-action-list list-unstyled m-0">
         {isAuthenticated ? (
           <>
-            <li className="mb-2 fw-bold">{user?.fullName || user?.email}</li>
+            <li className="mb-2 fw-bold">{user?.userName || user?.email}</li>
             <li className="mb-2">
               <Link
                 to={paths.profile}
@@ -72,7 +72,19 @@ const UserActionDropdown = () => {
           <span className="d-block py-1">Tổ chức trải nghiệm</span>
         </li>
         <li className="mb-2">
-          <span className="d-block py-1">Trung tâm trợ giúp</span>
+        <Link to={"/BookingHistory"}
+                className="text-decoration-none text-dark d-block py-1"
+              >
+                Lịch sử đặt phòng
+              </Link>
+        </li>
+        <li className="mb-2">
+          <Link
+                to={paths.contact}
+                className="text-decoration-none text-dark d-block py-1"
+              >
+                Trung tâm trợ giúp
+              </Link>
         </li>
       </ul>
     </div>

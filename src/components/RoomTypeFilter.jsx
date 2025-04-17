@@ -1,15 +1,35 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { RoomTypeContext } from "../context/RoomProvider";
 
 const RoomTypeFilter = () => {
   const { roomTypes, handleRoomTypeChange, filters } =
     useContext(RoomTypeContext);
+    
   return (
     <div className="filter-item d-flex flex-column">
       <div
         className="room-types-slider d-flex gap-3"
         style={{ overflowX: "auto", whiteSpace: "nowrap" }}
       >
+        <button
+          key="any"
+          className={`room-type-btn rounded-pill d-flex align-items-center gap-2 px-3 py-2 ${
+            filters.roomType === "Any" ? "active" : ""
+          }`}
+          onClick={() => handleRoomTypeChange("Any")}
+          style={{
+            border: `1px solid ${
+              filters.roomType === "Any" ? "#FF385C" : "#ddd"
+            }`,
+            backgroundColor:
+              filters.roomType === "Any" ? "#FFF5F7" : "white",
+            color: filters.roomType === "Any" ? "#FF385C" : "#222",
+            transition: "all 0.3s ease",
+          }}
+        >
+          <span>Tất cả</span>
+        </button>
+      
         {roomTypes.map((type) => (
           <button
             key={type.roomTypeID}

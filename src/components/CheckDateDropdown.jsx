@@ -344,68 +344,9 @@ const CheckDateDropdown = ({
         </div>
       </div>
 
-      <div className="quick-select">
-        <button
-          className={`quick-select-btn ${
-            checkDate.rangeOfDate === 0 ? "active" : ""
-          }`}
-          onClick={() => handleQuickSelect(0)}
-        >
-          Ngày chính xác
-        </button>
-        <button
-          className={`quick-select-btn ${
-            checkDate.rangeOfDate === 1 ? "active" : ""
-          }`}
-          onClick={() => handleQuickSelect(1)}
-        >
-          ± 1 ngày
-        </button>
-        <button
-          className={`quick-select-btn ${
-            checkDate.rangeOfDate === 2 ? "active" : ""
-          }`}
-          onClick={() => handleQuickSelect(2)}
-        >
-          ± 2 ngày
-        </button>
-        <button
-          className={`quick-select-btn ${
-            checkDate.rangeOfDate === 3 ? "active" : ""
-          }`}
-          onClick={() => handleQuickSelect(3)}
-        >
-          ± 3 ngày
-        </button>
-        <button
-          className={`quick-select-btn ${
-            checkDate.rangeOfDate === 7 ? "active" : ""
-          }`}
-          onClick={() => handleQuickSelect(7)}
-        >
-          ± 7 ngày
-        </button>
-        <button
-          className={`quick-select-btn ${
-            checkDate.rangeOfDate === 14 ? "active" : ""
-          }`}
-          onClick={() => handleQuickSelect(14)}
-        >
-          ± 14 ngày
-        </button>
-      </div>
+      
 
-      <div className="selected-dates">
-        <p>
-          Check-in Date:{" "}
-          {checkDate.checkInDate?.toLocaleDateString() || "Not selected"}
-        </p>
-        <p>
-          Check-out Date:{" "}
-          {checkDate.checkOutDate?.toLocaleDateString() || "Not selected"}
-        </p>
-        <p>Range of Date: {checkDate.rangeOfDate}</p>
-      </div>
+      
     </div>
   );
 };

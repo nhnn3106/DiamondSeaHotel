@@ -14,7 +14,7 @@ const Logo = () => {
       style={{ width: "30px" }}
     >
       <img className="img-fluid me-2" src={logo} alt="" />
-      <div className="text-danger fw-bold">airbnb</div>
+      <div className="text-danger fw-bold">Airbnb</div>
     </Link>
   );
 };

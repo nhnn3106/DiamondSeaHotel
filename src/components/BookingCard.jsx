@@ -1,13 +1,15 @@
 import React, { useState, useContext } from "react";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
-import { useBooking } from "../context/BookingContext";
+import BookingContext from "../context/BookingContext";
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 import { RoomTypeContext } from "../context/RoomProvider";
+import { AuthContext } from "../context/AuthProvider";
 
 function BookingCard({ room }) {
   const navigate = useNavigate();
-  const { validateBooking, updateBooking } = useBooking();
+  const { validateBooking, updateBooking } = useContext(BookingContext);
+  const {isVerify} = useContext(AuthContext);
   const { handleClickRoom } = useContext(RoomTypeContext);
   const [formData, setFormData] = useState({
     checkInDate: '',
@@ -18,18 +20,23 @@ function BookingCard({ room }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log("Input changed:", name, value);
     
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+
+    console.log(formData)
+    updateBooking({ [name]: value });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitting form:", formData);
-    handleClickRoom(room?.roomID);
+    e.preventDefault(); 
+    if(!isVerify){
+      alert("Chưa đăng nhập");
+      navigate('/login');
+    }
+      handleClickRoom(room?.roomID);
     navigate('/InputInfomation');
     // Parse dữ liệu trước khi validate
     const dataToValidate = {

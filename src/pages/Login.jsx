@@ -48,7 +48,7 @@ const Login = () => {
 
     return (
         <>
-            <Container className="py-5" style={{ marginTop: "250px" }}>
+            <Container className="py-5">
                 <Row className="justify-content-center">
                     <Col md={6} lg={5}>
                         <Card className="shadow rounded-4">

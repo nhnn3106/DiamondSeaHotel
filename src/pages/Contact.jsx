@@ -44,7 +44,7 @@ function Contact() {
     e.preventDefault();
     setIsLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Form submitted:", formData);
+    alert("Gửi tin nhắn thành công");
     setFormData({ name: "", email: "", subject: "", message: "" });
     setIsLoading(false);
   };
