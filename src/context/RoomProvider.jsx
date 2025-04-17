@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import anyWhere from "../assets/location/any-where.png";
 import austrialia from "../assets/location/austrialia.png";
 import europe from "../assets/location/europe.png";
@@ -11,7 +11,7 @@ export const RoomTypeContext = createContext([]);
 
 const RoomTypeProvider = ({ children }) => {
   const [searchData, setSearchData] = useState({
-    location: "Tìm kiếm điểm đến",
+    location: "Tìm kiếm linh hoạt",
     checkInDate: null,
     checkOutDate: null,
     guests: {
@@ -35,7 +35,7 @@ const RoomTypeProvider = ({ children }) => {
 
   const [locations, setLocations] = useState([
     { name: "Tìm kiếm linh hoạt", img: anyWhere },
-    { name: "Austrialia", img: austrialia },
+    { name: "Australia", img: austrialia },
     { name: "France", img: europe },
     { name: "South Korea", img: korea },
     { name: "Thailand", img: thailand },
@@ -150,7 +150,48 @@ const RoomTypeProvider = ({ children }) => {
     });
   };
 
-  const filteredRooms = rooms.filter((room) => {});
+  const filteredRooms = rooms.filter((room) => {
+    // Các biến thu thập
+    var booleanLocation = true;
+    var booleanGuests = true;
+    var booleanRoomType = true;
+    var booleanPriceRange = true;
+    var booleanAmenities = true;
+    // Thu thập room theo location
+    if (searchData.location == "Tìm kiếm linh hoạt") booleanLocation = true;
+    else if (room.location.includes(searchData.location))
+      booleanLocation = true;
+    else booleanLocation = false;
+
+    // Thu thập room theo số lượng người
+    const totalGuest =
+      searchData.guests.adults +
+      searchData.guests.children +
+      searchData.guests.infants;
+
+    if (totalGuest == 0) booleanGuests = true;
+    else if (totalGuest == Math.ceil(room.bedCount / 2)) booleanGuests = true;
+    else booleanGuests = false;
+
+    // Thu thập room theo roomtype
+    if (filters.roomType == "Any") booleanRoomType = true;
+    else if (filters.roomType == room.roomTypeName) booleanRoomType = true;
+    else booleanRoomType = false;
+
+    // Thu thập room theo priceRange
+    if (
+      filters.priceRange[0] < room.price &&
+      room.price < filters.priceRange[0]
+    )
+      booleanPriceRange = true;
+    else booleanPriceRange = false;
+
+    return (
+      booleanLocation && booleanGuests && booleanRoomType && booleanPriceRange
+    );
+  });
+
+  console.log(filteredRooms);
 
   return (
     <RoomTypeContext.Provider

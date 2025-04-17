@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { NavigateContext } from "../hooks/NavigateProvider";
-import { AuthContext } from "../hooks/AuthProvider";
+import { NavigateContext } from "../context/NavigateProvider";
+import { AuthContext } from "../context/AuthProvider";
 
 const UserActionDropdown = () => {
   const { paths } = useContext(NavigateContext);
@@ -27,7 +27,10 @@ const UserActionDropdown = () => {
           <>
             <li className="mb-2 fw-bold">{user?.fullName || user?.email}</li>
             <li className="mb-2">
-              <Link to={paths.profile} className="text-decoration-none text-dark d-block py-1">
+              <Link
+                to={paths.profile}
+                className="text-decoration-none text-dark d-block py-1"
+              >
                 Thông tin cá nhân
               </Link>
             </li>
@@ -44,12 +47,18 @@ const UserActionDropdown = () => {
         ) : (
           <>
             <li className="mb-2">
-              <Link to={paths.login} className="text-decoration-none text-dark d-block py-1">
+              <Link
+                to={paths.login}
+                className="text-decoration-none text-dark d-block py-1"
+              >
                 Đăng nhập
               </Link>
             </li>
             <li className="mb-2">
-              <Link to={paths.register} className="text-decoration-none text-dark d-block py-1">
+              <Link
+                to={paths.register}
+                className="text-decoration-none text-dark d-block py-1"
+              >
                 Đăng ký
               </Link>
             </li>

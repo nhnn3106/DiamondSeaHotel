@@ -19,6 +19,27 @@ app.use(cors({
   }));
 
 
+// API trả về danh sách các locations
+app.get("/locations", async (req, res) => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+
+        const query = `
+            SELECT DISTINCT TRIM(SUBSTRING_INDEX(location, ',', -1)) AS country
+            FROM rooms;
+        `;
+
+        const rows = await connection.query(query);
+
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json(error.message);
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
 // API trả về danh sách tiện nghi
 app.get("/amenities", async (req, res) => {
     let connection;

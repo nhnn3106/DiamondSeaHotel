@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.png
+public'/room/13123
+public/room.zip
+public/roomtype.zip

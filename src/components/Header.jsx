@@ -13,9 +13,9 @@ import UserActions from "./UserActions";
 import SearchbarFiller from "./SearchbarFiller";
 import FilterBar from "./FilterBar"; // Import FilterBar component
 import { Link } from "react-router-dom";
-import { RoomTypeContext } from "../hooks/RoomProvider";
+import { RoomTypeContext } from "../context/RoomProvider";
 import { useLocation } from "react-router-dom";
-import { NavigateContext } from "../hooks/NavigateProvider";
+import { NavigateContext } from "../context/NavigateProvider";
 
 const Header = () => {
   const { paths } = useContext(NavigateContext);

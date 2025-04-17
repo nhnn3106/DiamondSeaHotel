@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Search } from "lucide-react";
-import { RoomTypeContext } from "../hooks/RoomProvider";
+import { RoomTypeContext } from "../context/RoomProvider";
 
 const SearchBar = ({
   showSearchFiller,
@@ -42,7 +42,7 @@ const SearchBar = ({
         className="px-3 fw-bold search-item search-item-1"
         onClick={() => handleItemClick("location")} // Truyền "location"
       >
-        {searchData.location || "Địa điểm bất kỳ"}
+        {searchData.location}
       </div>
       <div className="split-line split-line-1"></div>
       <div
