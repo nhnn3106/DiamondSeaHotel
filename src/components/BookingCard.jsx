@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 import { RoomTypeContext } from "../context/RoomProvider";
 import { AuthContext } from "../context/AuthProvider";
+import { formatCurrency } from "../utils/formatters";
 
 
 function BookingCard({ room }) {
@@ -93,7 +94,7 @@ function BookingCard({ room }) {
       <Card.Body>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <div>
-            <span className="fs-3 fw-bold">${room?.price}</span>
+            <span className="fs-3 fw-bold">{formatCurrency(room?.price)}</span>
             <span className="text-muted">/đêm</span>
           </div>
           <div className="d-flex align-items-center">

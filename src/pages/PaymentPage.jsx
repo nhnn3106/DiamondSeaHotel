@@ -6,6 +6,7 @@ import ProgressStepper from '../components/ProgressStepper';
 import {RoomTypeContext} from '../context/RoomProvider';
 import { AuthContext } from '../context/AuthProvider';
 import BookingContext from '../context/BookingContext';
+import { formatCurrency } from "../utils/formatters";
 
 
 const PaymentPage = () => {
@@ -227,7 +228,7 @@ const PaymentPage = () => {
               <div className="booking-info-row total-price">
                 <span className="label">Tổng cộng:</span>
                 <span className="sum-price">
-                  {tongTien} $
+                  {formatCurrency(tongTien)}
                 </span>
               </div>
             </div>
@@ -366,7 +367,7 @@ const PaymentPage = () => {
                     <strong>Phòng:</strong> {currentRoom.name}
                   </p>
                   <p>
-                    <strong>Tổng cộng:</strong> {tongTien} $
+                    <strong>Tổng cộng:</strong> {formatCurrency(tongTien)}
                   </p>
                 </div>
                 <p className="note">
@@ -475,7 +476,7 @@ const PaymentPage = () => {
                   <strong>Số người:</strong> {currentRoom.soNguoi}
                 </p>
                 <p>
-                  <strong>Tổng cộng:</strong> {tongTien} $
+                  <strong>Tổng cộng:</strong> {formatCurrency(tongTien)}
                 </p>
                 <p>
                   <strong>Phương thức:</strong>{' '}

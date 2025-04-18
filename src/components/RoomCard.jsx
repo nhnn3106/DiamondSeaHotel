@@ -4,11 +4,12 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { RoomTypeContext } from "../context/RoomProvider";
 import { useContext } from "react";
+import PropTypes from "prop-types";
+import { formatCurrency } from "../utils/formatters";
 
 const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   const navigate = useNavigate();
   const {handleClickRoom} = useContext(RoomTypeContext);
-
 
   // State để theo dõi trạng thái của trái tim
   const [isFavorite, setIsFavorite] = useState(false);
@@ -28,42 +29,42 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   return (
     <Card
       id={id}
+      
       style={{
         width: "18rem",
-        borderRadius: "12px", // Bo góc 12px cho Card
-        overflow: "visible", // Đảm bảo không cắt xén các góc
+        height: "380px",
+        borderRadius: "12px",
+        overflow: "hidden",
         cursor: "pointer",
+        margin: "0 auto 20px auto"
       }}
-      className="room-card border m-4"
-       // Thêm sự kiện click vào card
+      className="room-card border shadow-sm"
     >
       {/* Carousel với biểu tượng trái tim */}
-      <div style={{ position: "relative", overflow: "visible" }}>
+      <div style={{ position: "relative", height: "220px" }}>
         <Carousel
           interval={null}
           indicators={true}
           controls={true}
           className="custom-carousel"
-          style={{ borderRadius: "12px", overflow: "visible" }} // Đảm bảo Carousel không cắt xén
+          style={{ borderRadius: "12px 12px 0 0" }}
         >
           {images.map((img) => (
             <Carousel.Item
               key={img.imageID}
-              style={{ borderRadius: "12px", overflow: "visible" }}
             >
               <img
                 style={{
                   width: "100%",
                   height: "220px",
-                  borderRadius: "12px", // Bo góc 12px cho hình ảnh
                   objectFit: "cover",
-                  objectPosition: "center", // Đảm bảo hình ảnh hiển thị đúng với bo góc
-                  display: "block", // Loại bỏ khoảng trống dưới hình ảnh
+                  objectPosition: "center",
+                  display: "block",
                 }}
+                onClick={handleCardClick}
                 loading="lazy"
                 src={img.pathImg}
                 alt=""
-                onClick={handleCardClick}
               />
             </Carousel.Item>
           ))}
@@ -76,24 +77,55 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
       </div>
 
       {/* Nội dung thẻ */}
-      <Card.Body className="p-3" style={{ padding: "10px 0" }}>
-        <Card.Title style={{ fontSize: "16px", fontWeight: "bold" }}>
-          {location}
-        </Card.Title>
-        <Card.Text style={{ fontSize: "14px", color: "#6c757d" }}>
-          {`${bedCount} giường ${bedType}`}
-        </Card.Text>
-        <Card.Text style={{ fontSize: "14px", fontWeight: "bold" }}>
-          ${price}
+      <Card.Body 
+        className="p-3" 
+        style={{ 
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between"
+        }}
+      >
+        <div>
+          <Card.Title 
+            style={{ 
+              fontSize: "16px", 
+              fontWeight: "bold",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              marginBottom: "8px"
+            }}
+          >
+            {location}
+          </Card.Title>
+          <Card.Text style={{ fontSize: "14px", color: "#6c757d" }}>
+            {`${bedCount} giường ${bedType}`}
+          </Card.Text>
+        </div>
+        <Card.Text style={{ fontSize: "14px", fontWeight: "bold", marginBottom: 0 }}>
+          {formatCurrency(price)}
         </Card.Text>
       </Card.Body>
     </Card>
   );
 };
 
+// Add PropTypes validation
+RoomCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  bedType: PropTypes.string.isRequired,
+  bedCount: PropTypes.number.isRequired,
+  location: PropTypes.string.isRequired,
+  images: PropTypes.array.isRequired
+};
+
 export default RoomCard;
 
-const CustomHeart = ({ isFavourite = true, handleFavoriteClick }) => {
+const CustomHeart = ({ isFavourite, handleFavoriteClick }) => {
   return (
     <>
       {isFavourite ? (
@@ -104,11 +136,11 @@ const CustomHeart = ({ isFavourite = true, handleFavoriteClick }) => {
             top: "10px",
             right: "10px",
             color: "red",
-            padding: "3px", // Khoảng cách giữa biểu tượng và viền
+            padding: "3px",
             cursor: "pointer",
-            zIndex: 1, // Đảm bảo biểu tượng nằm trên carousel
+            zIndex: 1,
           }}
-          onClick={handleFavoriteClick} // Sự kiện khi ấn vào trái tim
+          onClick={handleFavoriteClick}
         />
       ) : (
         <FaRegHeart
@@ -117,15 +149,23 @@ const CustomHeart = ({ isFavourite = true, handleFavoriteClick }) => {
             position: "absolute",
             top: "10px",
             right: "10px",
-            color: "white", // Màu của biểu tượng
-            // Làm trái tim nằm trong một vòng tròn
-            padding: "3px", // Khoảng cách giữa biểu tượng và viền
+            color: "white",
+            padding: "3px",
             cursor: "pointer",
-            zIndex: 1, // Đảm bảo biểu tượng nằm trên carousel
+            zIndex: 1,
           }}
-          onClick={handleFavoriteClick} // Sự kiện khi ấn vào trái tim
+          onClick={handleFavoriteClick}
         />
       )}
     </>
   );
+};
+
+CustomHeart.propTypes = {
+  isFavourite: PropTypes.bool,
+  handleFavoriteClick: PropTypes.func.isRequired
+};
+
+CustomHeart.defaultProps = {
+  isFavourite: false
 };

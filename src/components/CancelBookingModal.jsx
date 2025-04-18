@@ -1,5 +1,7 @@
-import { Modal, Button } from 'react-bootstrap';
+import React from 'react';
+import { Modal, Button, Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { formatCurrency } from "../utils/formatters";
 
 const CancelBookingModal = ({ showModal, onHide, onConfirm, booking }) => {
   return (
@@ -49,7 +51,7 @@ const CancelBookingModal = ({ showModal, onHide, onConfirm, booking }) => {
               </div>
               
               <div className="booking-price">
-                Tổng tiền: {booking.price} $
+                Tổng tiền: {formatCurrency(booking.price)}
               </div>
             </div>
           )}

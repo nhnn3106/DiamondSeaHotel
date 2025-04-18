@@ -96,26 +96,26 @@ INSERT INTO RoomTypes (roomTypeID, name, pathImg) VALUES
 
 -- Insert 20 Rooms
 INSERT INTO Rooms (roomID, name, price, dienTich, soNguoi, bedType, bedCount, roomTypeID, danhGia, moTa, location) VALUES
-(1, 'Standard Room 101', 100.00, 25.5, 2, 'Double', 1, 1, 4.5, 'Cozy standard room', 'Floor 1'),
-(2, 'Standard Room 102', 100.00, 25.5, 2, 'Double', 1, 1, 4.3, 'Comfortable standard room', 'Floor 1'),
-(3, 'Deluxe Room 201', 200.00, 35.0, 3, 'Queen', 1, 2, 4.7, 'Spacious deluxe room', 'Floor 2'),
-(4, 'Deluxe Room 202', 200.00, 35.0, 3, 'Queen', 1, 2, 4.6, 'Modern deluxe room', 'Floor 2'),
-(5, 'Suite Room 301', 350.00, 50.0, 4, 'King', 1, 3, 4.9, 'Luxury suite', 'Floor 3'),
-(6, 'Suite Room 302', 350.00, 50.0, 4, 'King', 1, 3, 4.8, 'Premium suite', 'Floor 3'),
-(7, 'Family Room 401', 250.00, 45.0, 5, 'Double', 2, 4, 4.4, 'Spacious family room', 'Floor 4'),
-(8, 'Family Room 402', 250.00, 45.0, 5, 'Double', 2, 4, 4.5, 'Comfortable family room', 'Floor 4'),
-(9, 'Standard Room 103', 100.00, 25.5, 2, 'Double', 1, 1, 4.2, 'Budget standard room', 'Floor 1'),
-(10, 'Standard Room 104', 100.00, 25.5, 2, 'Double', 1, 1, 4.3, 'Simple standard room', 'Floor 1'),
-(11, 'Deluxe Room 203', 200.00, 35.0, 3, 'Queen', 1, 2, 4.6, 'Elegant deluxe room', 'Floor 2'),
-(12, 'Deluxe Room 204', 200.00, 35.0, 3, 'Queen', 1, 2, 4.7, 'Stylish deluxe room', 'Floor 2'),
-(13, 'Suite Room 303', 350.00, 50.0, 4, 'King', 1, 3, 4.9, 'Exclusive suite', 'Floor 3'),
-(14, 'Suite Room 304', 350.00, 50.0, 4, 'King', 1, 3, 4.8, 'Grand suite', 'Floor 3'),
-(15, 'Family Room 403', 250.00, 45.0, 5, 'Double', 2, 4, 4.5, 'Large family room', 'Floor 4'),
-(16, 'Family Room 404', 250.00, 45.0, 5, 'Double', 2, 4, 4.4, 'Cozy family room', 'Floor 4'),
-(17, 'Standard Room 105', 100.00, 25.0, 2, 'Double', 1, 1, 4.3, 'Basic standard room', 'Floor 1'),
-(18, 'Standard Room 106', 100.00, 25.0, 2, 'Double', 1, 1, 4.2, 'Minimal standard room', 'Floor 1'),
-(19, 'Deluxe Room 205', 200.00, 35.0, 3, 'Queen', 1, 2, 4.6, 'Chic deluxe room', 'Floor 2'),
-(20, 'Deluxe Room 206', 200.00, 35.0, 3, 'Queen', 1, 2, 4.7, 'Modern deluxe room', 'Floor 2');
+(1, 'Standard Room 101', 800000, 25.5, 2, 'Double', 1, 1, 4.5, 'Cozy standard room', 'Floor 1'),
+(2, 'Standard Room 102', 750000, 25.5, 2, 'Double', 1, 1, 4.3, 'Comfortable standard room', 'Floor 1'),
+(3, 'Deluxe Room 201', 930000, 35.0, 3, 'Queen', 1, 2, 4.7, 'Spacious deluxe room', 'Floor 2'),
+(4, 'Deluxe Room 202', 450000, 35.0, 3, 'Queen', 1, 2, 4.6, 'Modern deluxe room', 'Floor 2'),
+(5, 'Suite Room 301', 670000, 50.0, 4, 'King', 1, 3, 4.9, 'Luxury suite', 'Floor 3'),
+(6, 'Suite Room 302', 740000, 50.0, 4, 'King', 1, 3, 4.8, 'Premium suite', 'Floor 3'),
+(7, 'Family Room 401', 650000, 45.0, 5, 'Double', 2, 4, 4.4, 'Spacious family room', 'Floor 4'),
+(8, 'Family Room 402', 620000, 45.0, 5, 'Double', 2, 4, 4.5, 'Comfortable family room', 'Floor 4'),
+(9, 'Standard Room 103', 840000, 25.5, 2, 'Double', 1, 1, 4.2, 'Budget standard room', 'Floor 1'),
+(10, 'Standard Room 104', 740000, 25.5, 2, 'Double', 1, 1, 4.3, 'Simple standard room', 'Floor 1'),
+(11, 'Deluxe Room 203', 680000, 35.0, 3, 'Queen', 1, 2, 4.6, 'Elegant deluxe room', 'Floor 2'),
+(12, 'Deluxe Room 204', 450000, 35.0, 3, 'Queen', 1, 2, 4.7, 'Stylish deluxe room', 'Floor 2'),
+(13, 'Suite Room 303', 620000, 50.0, 4, 'King', 1, 3, 4.9, 'Exclusive suite', 'Floor 3'),
+(14, 'Suite Room 304', 540000, 50.0, 4, 'King', 1, 3, 4.8, 'Grand suite', 'Floor 3'),
+(15, 'Family Room 403', 600000, 45.0, 5, 'Double', 2, 4, 4.5, 'Large family room', 'Floor 4'),
+(16, 'Family Room 404', 360000, 45.0, 5, 'Double', 2, 4, 4.4, 'Cozy family room', 'Floor 4'),
+(17, 'Standard Room 105', 740000, 25.0, 2, 'Double', 1, 1, 4.3, 'Basic standard room', 'Floor 1'),
+(18, 'Standard Room 106', 670000, 25.0, 2, 'Double', 1, 1, 4.2, 'Minimal standard room', 'Floor 1'),
+(19, 'Deluxe Room 205', 850000, 35.0, 3, 'Queen', 1, 2, 4.6, 'Chic deluxe room', 'Floor 2'),
+(20, 'Deluxe Room 206', 790000, 35.0, 3, 'Queen', 1, 2, 4.7, 'Modern deluxe room', 'Floor 2');
 
 UPDATE Rooms
 SET location = CASE
@@ -258,6 +258,16 @@ INSERT INTO Room_Amenity (roomID, amenityID) VALUES
 (19, 1), (19, 2), (19, 3), (19, 4), (19, 5),
 (20, 1), (20, 2), (20, 3), (20, 4);
 
+
+INSERT INTO Orders (orderID, price, roomID, orderDate, checkInDate, checkOutDate, accountID, name, sdt, email, type, attribute) VALUES
+-- User 1 - Đơn 1: Phòng 1 (800000/đêm) - 3 đêm = 2400000
+(1, 2400000, 1, '2024-01-10', '2024-01-15', '2024-01-18', 1, 'user1', '0958385334', 'user1@example.com', 'Thanh toán trực tuyến', 'Đã thanh toán'),
+-- User 1 - Đơn 2: Phòng 5 (670000/đêm) - 4 đêm = 2680000
+(2, 2680000, 5, '2024-02-01', '2024-02-15', '2024-02-19', 1, 'user1', '0958385334', 'user1@example.com', 'Chuyển khoản ngân hàng', 'Đã thanh toán'),
+-- User 2 - Đơn 1: Phòng 3 (930000/đêm) - 3 đêm = 2790000
+(3, 2790000, 3, '2024-03-10', '2024-03-15', '2024-03-18', 2, 'user2', '0987654321', 'user2@example.com', 'Thanh toán tại khách sạn', 'Đã thanh toán'),
+-- User 2 - Đơn 2: Phòng 19 (850000/đêm) - 4 đêm = 3400000
+(4, 3400000, 19, '2024-04-05', '2024-04-10', '2024-04-14', 2, 'user2', '0987654321', 'user2@example.com', 'Thanh toán trực tuyến', 'Đã thanh toán');
 
 UPDATE Rooms
 SET location = CASE

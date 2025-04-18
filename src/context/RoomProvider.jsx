@@ -29,7 +29,7 @@ const RoomTypeProvider = ({ children }) => {
   // Trạng thái bộ lọc
   const [filters, setFilters] = useState({
     roomType: "Any",
-    priceRange: [50, 500],
+    priceRange: [100000, 1000000],
     amenities: [],
     services: [], // Thêm services vào filters
   });

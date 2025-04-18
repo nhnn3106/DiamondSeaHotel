@@ -10,6 +10,7 @@ import {
   User, Phone, Mail, LogIn, LogOut, Users, Bed, Ruler, MapPin, Wifi,
   BadgeCheck, ConciergeBell, Info, ArrowRight
 } from 'lucide-react';
+import { formatCurrency } from "../utils/formatters";
 
 const Input_Information = () => {
   const { bookingData } = useContext(BookingContext);
@@ -216,12 +217,12 @@ const Input_Information = () => {
               <div className="price-summary">
                 <div className="price-row">
                   <span className="price-label">Giá phòng (1 đêm)</span>
-                  <span className="price-value">{currentRoom.price} $</span>
+                  <span className="price-value">{formatCurrency(currentRoom.price)}</span>
                 </div>
                 <div className="separator price-separator"></div>
                 <div className="price-row total">
                   <span className="price-label">Tổng cộng</span>
-                  <span className="price-value total-value">{tongTien} $</span>
+                  <span className="price-value total-value">{formatCurrency(tongTien)}</span>
                 </div>
               </div>
             </div>

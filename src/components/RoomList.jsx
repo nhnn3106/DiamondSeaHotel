@@ -1,10 +1,10 @@
-import { Container, Alert } from "react-bootstrap";
+import { Container, Alert, Row, Col } from "react-bootstrap";
 import RoomCard from "./RoomCard";
 import Lazyload from "react-lazyload";
 import PropTypes from "prop-types";
 
 const RoomList = ({ rooms }) => {
-  const newRoom = rooms.slice(0, 12);
+  const newRoom = rooms.slice(0, 20);
 
   if (rooms.length === 0) {
     return (
@@ -22,20 +22,23 @@ const RoomList = ({ rooms }) => {
   }
 
   return (
-    <Container className="d-flex flex-wrap">
-      {newRoom.map((room) => (
-        <Lazyload key={room.roomID} height={300} offset={100}>
-          <RoomCard
-            key={room.roomID}
-            id={room.roomID}
-            price={room.price}
-            bedType={room.bedType}
-            bedCount={room.bedCount}
-            location={room.location}
-            images={room.images}
-          />
-        </Lazyload>
-      ))}
+    <Container className="py-4">
+      <Row className="g-4 justify-content-center">
+        {newRoom.map((room) => (
+          <Col key={room.roomID} xs={12} sm={6} md={4} lg={3} className="d-flex justify-content-center">
+            <Lazyload height={380} offset={100} once>
+              <RoomCard
+                id={room.roomID}
+                price={room.price}
+                bedType={room.bedType}
+                bedCount={room.bedCount}
+                location={room.location}
+                images={room.images}
+              />
+            </Lazyload>
+          </Col>
+        ))}
+      </Row>
     </Container>
   );
 };

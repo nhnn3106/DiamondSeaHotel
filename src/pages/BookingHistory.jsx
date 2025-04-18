@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import "../Css/BookingHistory.css";
 import { AuthContext } from "../context/AuthProvider";
 import CancelBookingModal from "../components/CancelBookingModal";
+import { formatCurrency } from "../utils/formatters";
 
 const BookingHistory = () => {
   const { user } = useContext(AuthContext);
@@ -316,7 +317,7 @@ const BookingHistory = () => {
                         </span>
                       </p>
                       <p className="booking-price">
-                        Tổng cộng: {booking.price} $
+                        Tổng cộng: {formatCurrency(booking.price)}
                       </p>
                     </div>
                     <div className="booking-actions">

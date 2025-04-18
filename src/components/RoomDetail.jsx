@@ -4,6 +4,7 @@ import BookingContext from "../context/BookingContext";
 import { RoomTypeContext } from "../context/RoomProvider";
 import { AuthContext } from "../context/AuthProvider";
 import { useContext } from "react";
+import { formatCurrency } from "../utils/formatters";
 
 import {
   FaBed,
@@ -399,7 +400,7 @@ const RoomDetail = () => {
                             {currentRoom.location}
                           </p>
                           <p className="mb-0 text-primary fw-bold">
-                            ${currentRoom.price}/đêm
+                            {formatCurrency(currentRoom.price)}/đêm
                           </p>
                         </div>
                       </Popup>
@@ -460,7 +461,7 @@ const RoomDetail = () => {
               <Card.Body>
                 <div className="d-flex justify-content-between align-items-center mb-4">
                   <div>
-                    <span className="fs-3 fw-bold">${currentRoom.price}</span>
+                    <span className="fs-3 fw-bold">{formatCurrency(currentRoom.price)}</span>
                     <span className="text-muted">/đêm</span>
                   </div>
                   <div className="d-flex align-items-center">
