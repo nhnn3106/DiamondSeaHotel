@@ -155,45 +155,45 @@ END;
 -- Insert 5 images per room (100 images total)
 INSERT INTO RoomImages (roomID, imageID, pathImg) VALUES
 -- Room 1
-(1, 1, '/room/1.png'), (1, 2, '/room/2.png'), (1, 3, '/room/3.png'), (1, 4, '/room/4.png'), (1, 5, '/room/5.png'),
+(1, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744903319/22_exibll.png'), (1, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744904145/1_wfwphh.png'), (1, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907569/3_dq2ryz.jpg'), (1, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907660/4_h6eyzg.jpg'), (1, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907676/5_saxecu.jpg'),
 -- Room 2
-(2, 1, '/room/6.png'), (2, 2, '/room/7.png'), (2, 3, '/room/8.png'), (2, 4, '/room/9.png'), (2, 5, '/room/10.png'),
+(2, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907694/6_dxke7n.jpg'), (2, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907709/7_ymhfrx.jpg'), (2, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907730/8_ly0y1l.jpg'), (2, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907743/9_zysdyn.jpg'), (2, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907758/10_f9v48s.jpg'),
 -- Room 3
-(3, 1, '/room/11.png'), (3, 2, '/room/12.png'), (3, 3, '/room/13.png'), (3, 4, '/room/14.png'), (3, 5, '/room/15.png'),
+(3, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907773/11_ufjga4.jpg'), (3, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907789/12_fnhhoc.jpg'), (3, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907811/13_syem2t.jpg'), (3, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907829/14_sgjptr.jpg'), (3, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907842/15_h5kfft.jpg'),
 -- Room 4
-(4, 1, '/room/16.png'), (4, 2, '/room/17.png'), (4, 3, '/room/18.png'), (4, 4, '/room/19.png'), (4, 5, '/room/20.png'),
+(4, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907861/16_go9i10.jpg'), (4, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907876/17_xwau4l.jpg'), (4, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907893/18_rko2f8.jpg'), (4, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907911/19_ixvk4c.jpg'), (4, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744907957/20_ykwmeq.jpg'),
 -- Room 5
-(5, 1, '/room/21.png'), (5, 2, '/room/22.png'), (5, 3, '/room/23.png'), (5, 4, '/room/24.png'), (5, 5, '/room/25.png'),
+(5, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909689/21_liiw4n.jpg'), (5, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908066/22_dh2pcq.jpg'), (5, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908092/23_nte0fc.jpg'), (5, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908121/24_reuuww.jpg'), (5, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908137/25_pqvwxu.jpg'),
 -- Room 6
-(6, 1, '/room/26.png'), (6, 2, '/room/27.png'), (6, 3, '/room/28.png'), (6, 4, '/room/29.png'), (6, 5, '/room/30.png'),
+(6, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908188/26_sukwtn.jpg'), (6, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908209/27_o2zb72.jpg'), (6, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908226/28_wsg1tr.jpg'), (6, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908250/29_bvazqc.jpg'), (6, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908273/30_whvksi.jpg'),
 -- Room 7
-(7, 1, '/room/31.png'), (7, 2, '/room/32.png'), (7, 3, '/room/33.png'), (7, 4, '/room/34.png'), (7, 5, '/room/35.png'),
+(7, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909724/31_a7ebe3.jpg'), (7, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909752/32_q63lcd.jpg'), (7, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908343/33_egblix.jpg'), (7, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908373/34_zxnqqh.jpg'), (7, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908391/35_u7xsrf.jpg'),
 -- Room 8
-(8, 1, '/room/36.png'), (8, 2, '/room/37.png'), (8, 3, '/room/38.png'), (8, 4, '/room/39.png'), (8, 5, '/room/40.png'),
+(8, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908413/36_sugh1v.jpg'), (8, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908453/37_jqbmos.jpg'), (8, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908474/38_qujkhy.jpg'), (8, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908495/39_se84ta.jpg'), (8, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908530/40_hfdrs7.jpg'),
 -- Room 9
-(9, 1, '/room/41.png'), (9, 2, '/room/42.png'), (9, 3, '/room/43.png'), (9, 4, '/room/44.png'), (9, 5, '/room/45.png'),
+(9, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909771/41_frkyrk.jpg'), (9, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908566/42_fw8wnk.jpg'), (9, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908587/43_d1wywf.jpg'), (9, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908604/44_wyhrbg.jpg'), (9, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908622/45_os3zzs.jpg'),
 -- Room 10
-(10, 1, '/room/46.png'), (10, 2, '/room/47.png'), (10, 3, '/room/48.png'), (10, 4, '/room/49.png'), (10, 5, '/room/50.png'),
+(10, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908642/46_iovr1y.jpg'), (10, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908660/47_cls1bm.jpg'), (10, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908678/48_omrq88.jpg'), (10, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908696/49_ecy0k7.jpg'), (10, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909794/50_cnnjpk.jpg'),
 -- Room 11
-(11, 1, '/room/51.png'), (11, 2, '/room/52.png'), (11, 3, '/room/53.png'), (11, 4, '/room/54.png'), (11, 5, '/room/55.png'),
+(11, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908737/51_rvfce1.jpg'), (11, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909818/52_jwtwgm.jpg'), (11, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908793/53_sf0p7m.jpg'), (11, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908824/54_bre5jg.jpg'), (11, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908851/55_akcstk.jpg'),
 -- Room 12
-(12, 1, '/room/56.png'), (12, 2, '/room/57.png'), (12, 3, '/room/58.png'), (12, 4, '/room/59.png'), (12, 5, '/room/60.png'),
+(12, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908872/56_hfbmr3.jpg'), (12, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908891/57_gc80ft.jpg'), (12, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908913/58_rpyvfa.jpg'), (12, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908932/59_ldkyem.jpg'), (12, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908952/60_gsllxe.jpg'),
 -- Room 13
-(13, 1, '/room/61.png'), (13, 2, '/room/62.png'), (13, 3, '/room/63.png'), (13, 4, '/room/64.png'), (13, 5, '/room/65.png'),
+(13, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744908990/61_occ6co.jpg'), (13, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909013/62_isknn6.jpg'), (13, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909038/63_psxwpe.jpg'), (13, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909063/64_a9cvol.jpg'), (13, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909082/65_wizfc1.jpg'),
 -- Room 14
-(14, 1, '/room/66.png'), (14, 2, '/room/67.png'), (14, 3, '/room/68.png'), (14, 4, '/room/69.png'), (14, 5, '/room/70.png'),
+(14, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909116/66_ev0ktg.jpg'), (14, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909133/67_tbt1w4.jpg'), (14, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909152/68_cmgmze.jpg'), (14, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909172/69_r7lmjz.jpg'), (14, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909193/70_tuvm8h.jpg'),
 -- Room 15
-(15, 1, '/room/71.png'), (15, 2, '/room/72.png'), (15, 3, '/room/73.png'), (15, 4, '/room/74.png'), (15, 5, '/room/75.png'),
+(15, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909215/71_i6wb7s.jpg'), (15, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909235/72_nppkhi.jpg'), (15, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909253/73_gjgdnq.jpg'), (15, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909274/74_emypii.jpg'), (15, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909296/95_pul60y.jpg'),
 -- Room 16
-(16, 1, '/room/76.png'), (16, 2, '/room/77.png'), (16, 3, '/room/78.png'), (16, 4, '/room/79.png'), (16, 5, '/room/80.png'),
+(16, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909318/76_kaxt32.jpg'), (16, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909337/77_jiyun8.jpg'), (16, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909360/78_tze7cm.jpg'), (16, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909380/79_qfyyyl.jpg'), (16, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744909410/80_pz2qlj.jpg'),
 -- Room 17
-(17, 1, '/room/81.png'), (17, 2, '/room/82.png'), (17, 3, '/room/83.png'), (17, 4, '/room/84.png'), (17, 5, '/room/85.png'),
+(17, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951605/81_dmy1u5.jpg'), (17, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951624/82_k1wyoi.jpg'), (17, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951648/83_t7hzhw.jpg'), (17, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951670/84_f0jnrf.jpg'), (17, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951697/85_gjbnlh.jpg'),
 -- Room 18
-(18, 1, '/room/86.png'), (18, 2, '/room/87.png'), (18, 3, '/room/88.png'), (18, 4, '/room/89.png'), (18, 5, '/room/90.png'),
+(18, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951721/86_ewd8kq.jpg'), (18, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951741/87_witurl.jpg'), (18, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951760/88_hd2rph.jpg'), (18, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951787/89_mwz746.jpg'), (18, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951806/90_fgxins.jpg'),
 -- Room 19
-(19, 1, '/room/91.png'), (19, 2, '/room/92.png'), (19, 3, '/room/93.png'), (19, 4, '/room/94.png'), (19, 5, '/room/95.png'),
+(19, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951836/91_kptlqj.jpg'), (19, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951859/92_vapbnl.jpg'), (19, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951877/93_lfbt0s.jpg'), (19, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951895/95_wmmuml.jpg'), (19, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951895/95_wmmuml.jpg'),
 -- Room 20
-(20, 1, '/room/96.png'), (20, 2, '/room/97.png'), (20, 3, '/room/98.png'), (20, 4, '/room/99.png'), (20, 5, '/room/100.png');
+(20, 1, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951932/96_uhrgce.jpg'), (20, 2, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951960/97_wspebi.jpg'), (20, 3, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744951978/98_lmscjq.jpg'), (20, 4, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744952000/99_ks8g8n.jpg'), (20, 5, 'https://res.cloudinary.com/derrryb5t/image/upload/v1744952044/100_lfmujr.jpg');
 
 -- Insert Services
 INSERT INTO Services (serviceID, name, pathImg) VALUES
@@ -258,6 +258,7 @@ INSERT INTO Room_Amenity (roomID, amenityID) VALUES
 (19, 1), (19, 2), (19, 3), (19, 4), (19, 5),
 (20, 1), (20, 2), (20, 3), (20, 4);
 
+
 UPDATE Rooms
 SET location = CASE
     -- Room IDs 1-4: United States
@@ -291,6 +292,4 @@ SET location = CASE
     WHEN roomID = 19 THEN '111 Via Dante, Milan, Thailand'
     WHEN roomID = 20 THEN '222 Via Toledo, Naples, Australia'
 END;
-
-
 

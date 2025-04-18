@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BookingContext from "../context/BookingContext";
 import { RoomTypeContext } from "../context/RoomProvider";
@@ -47,13 +47,24 @@ const RoomDetail = () => {
   const { bookingData, updateBooking, errors, validateBooking } = useContext(BookingContext);
   const navigate = useNavigate();
   const { currentRoom, handleClickRoom } = useContext(RoomTypeContext);
+  const [modalShow, setModalShow] = useState(false);
+
+  // Define onHide function to close the modal
+  const onHide = () => {
+    setModalShow(false);
+  };
 
   // Load room data when component mounts or ID changes
   useEffect(() => {
     if (id) {
       handleClickRoom(parseInt(id));
+      updateBooking({
+        checkInDate: '',
+        checkOutDate: '',
+        guests: 1,
+      });
     }
-  }, [id, handleClickRoom]);
+  }, [id, handleClickRoom, updateBooking]);
 
   if (!currentRoom) {
     return (
@@ -129,12 +140,11 @@ const RoomDetail = () => {
 
   // Xử lý submit form
   const handleSubmit = (e) => {
+    e.preventDefault();
     if (!isVerify) {
-      alert("Vui lòng đăng nhập trên trang chủ");
-      navigate("/login");
+      setModalShow(true); // Show the modal only
       return;
     }
-    e.preventDefault();
     if (!currentRoom) return;
 
     if (!bookingData.checkInDate || !bookingData.checkOutDate) {
@@ -154,14 +164,20 @@ const RoomDetail = () => {
       const nights = calculateNights();
       const totalPrice = parseFloat(currentRoom.price) * nights + 10;
 
-      updateBooking({ 
+      updateBooking({
         totalPrice,
         roomID: currentRoom.roomID,
         roomName: currentRoom.name,
-        roomPrice: currentRoom.price
+        roomPrice: currentRoom.price,
       });
       navigate("/InputInfomation");
     }
+  };
+
+  // Xử lý xác nhận trong modal
+  const handleConfirm = () => {
+    setModalShow(false); // Close the modal
+    navigate("/login"); // Navigate to login
   };
 
   // Style cho bản đồ
@@ -529,6 +545,41 @@ const RoomDetail = () => {
                     Đặt phòng ngay
                   </Button>
                 </Form>
+
+                {/* Modal Thông báo khi đặt phòng mà chưa đăng nhập */}
+                <div
+                  className={`modal fade ${modalShow ? "show d-block" : ""}`}
+                  tabIndex="-1"
+                  style={{ backgroundColor: modalShow ? "rgba(0,0,0,0.5)" : "transparent" }}
+                >
+                  <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title text-white">Yêu cầu đăng nhập</h5>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          onClick={onHide}
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        <p className="mb-0">
+                          Vui lòng đăng nhập để tiếp tục đặt phòng. Bạn sẽ được chuyển hướng đến trang đăng nhập.
+                        </p>
+                      </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={handleConfirm}
+                        >
+                          Xác nhận
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <div className="border-top pt-3">
                   <div className="d-flex justify-content-between mb-2">

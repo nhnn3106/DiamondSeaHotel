@@ -21,7 +21,7 @@ const PaymentPage = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const {createOrder} = useContext(PaymentContext);
-
+  const [hinhThucThanhToan,setHinhThucThanhToan] = useState('Thẻ tín dụng');
   const tinhSoNgay = () => {
     const ngayNhan = new Date(bookingData.checkInDate);
     const ngayTra = new Date(bookingData.checkOutDate);
@@ -43,7 +43,7 @@ const PaymentPage = () => {
     name: user.userName,
     sdt: user.sdt,
     email: user.email,
-    type: 'tienmat'
+    type: hinhThucThanhToan
   };
 
   const renderStars = () => {
@@ -66,8 +66,19 @@ const PaymentPage = () => {
 
   const handlePaymentMethodChange = (method) => {
     setPhuongThucThanhToan(method);
+    if (method === 'credit-card') {
+      setHinhThucThanhToan('Credit Card');
+    }else if (method === 'pay-at-hotel') {
+      setHinhThucThanhToan('Thanh toán tại khách sạn');
+    }else if (method === 'bank-transfer') {
+      setHinhThucThanhToan('Chuyển khoản qua ngân hàng');
+    }
     setLoi('');
+    console.log(hinhThucThanhToan)
+
   };
+
+
 
   const validateCardDetails = () => {
     if (!soThe.match(/^\d{4} \d{4} \d{4} \d{4}$/)) return false;
@@ -84,7 +95,7 @@ const PaymentPage = () => {
       return;
     }
     try {
-
+      createOrder(orderData);
       setShowModal(true);
     } catch (error) {
       setLoi('Thanh toán thất bại. Vui lòng thử lại.');
@@ -97,7 +108,7 @@ const PaymentPage = () => {
   };
 
   const handleBankTransferConfirm = () => {
-
+    createOrder(orderData);
     setShowModal(true);
   };
 
@@ -199,6 +210,7 @@ const PaymentPage = () => {
                   ))}
                 </span>
               </div>
+ 
               <div className="booking-info-row">
                 <span className="label">Dịch vụ:</span>
                 <span className="value">
@@ -393,7 +405,7 @@ const PaymentPage = () => {
                       <span className="bank-value content-value">
                         Thanh toán #{currentRoom.roomID}
                       </span>
-                      <button className="copy-btn">
+                      <button className="copy-btn" >
                         <i className="fas fa-copy"></i>
                       </button>
                     </div>

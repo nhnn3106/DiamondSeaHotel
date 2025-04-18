@@ -7,6 +7,7 @@ const BookingHistory = () => {
   const [bookings, setBookings] = useState([]);
   const [expanded, setExpanded] = useState({});
   const [activeFilter, setActiveFilter] = useState("all");
+ 
   const [dateFilter, setDateFilter] = useState({
     startDate: "",
     endDate: "",
@@ -359,6 +360,10 @@ const BookingHistory = () => {
                         <div className="booking-info-row">
                           <span className="label">Mô tả:</span>
                           <span className="value">{booking.room.moTa}</span>
+                        </div>
+                        <div className="booking-info-row">
+                          <span className="label">Hình thức thanh toán:</span>
+                          <span className="value">{booking.type} </span>
                         </div>
                         <div className="booking-info-row">
                           <span className="label">Tiện ích:</span>

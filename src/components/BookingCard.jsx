@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
 import BookingContext from "../context/BookingContext";
 import PropTypes from 'prop-types';
 import { useNavigate } from "react-router-dom";
 import { RoomTypeContext } from "../context/RoomProvider";
 import { AuthContext } from "../context/AuthProvider";
+
 
 function BookingCard({ room }) {
   const navigate = useNavigate();
@@ -17,6 +18,16 @@ function BookingCard({ room }) {
     guests: "1",
     roomId: room?.roomID || null
   });
+  const [modalShow, setModalShow] = useState(false);
+
+  useEffect(() => {
+    updateBooking({
+      checkInDate: '',
+      checkOutDate: '',
+      guests: "1",
+      roomId: room?.roomID || null
+    });
+  }, [updateBooking, room]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,9 +43,9 @@ function BookingCard({ room }) {
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    if(!isVerify){
-      alert("Chưa đăng nhập");
-      navigate('/login');
+    if (!isVerify) {
+      setModalShow(true); // Show the modal only
+      return;
     }
       handleClickRoom(room?.roomID);
     navigate('/InputInfomation');
@@ -59,8 +70,23 @@ function BookingCard({ room }) {
     }
   };
 
+  const handleConfirm = () => {
+    setModalShow(false); // Close the modal
+    navigate("/login"); // Navigate to login
+  };
+
+  //ẩn modal đi khi click dấu X
+  const onHide = () => {
+    setModalShow(false);
+  };
+
+
+
+
+
   return (
-    <Card className="booking-card shadow position-sticky" style={{ top: "2rem" }}>
+    <>
+        <Card className="booking-card shadow position-sticky" style={{ top: "2rem" }}>
       <Card.Body>
         <div className="d-flex justify-content-between align-items-center mb-4">
           <div>
@@ -133,7 +159,44 @@ function BookingCard({ room }) {
         </Form>
       </Card.Body>
     </Card>
-  );
+
+
+   { /* Modal Thông báo khi đặt phòng mà chưa đăng nhập */}
+    <div
+    className={`modal fade ${modalShow ? "show d-block" : ""}`}
+    tabIndex="-1"
+    style={{ backgroundColor: modalShow ? "rgba(0,0,0,0.5)" : "transparent" }}
+    >
+    <div className="modal-dialog modal-dialog-centered">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title text-white">Yêu cầu đăng nhập</h5>
+          <button
+            type="button"
+            className="btn-close"
+            onClick={onHide}
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="modal-body">
+          <p className="mb-0">
+            Vui lòng đăng nhập để tiếp tục đặt phòng. Bạn sẽ được chuyển hướng đến trang đăng nhập.
+          </p>
+        </div>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleConfirm}
+          >
+            Xác nhận
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+    </>
+      );
 }
 
 BookingCard.propTypes = {

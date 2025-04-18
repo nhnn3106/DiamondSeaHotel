@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Card, Carousel } from "react-bootstrap";
-import { Heart } from "lucide-react"; // Sử dụng biểu tượng trái tim từ lucide-react
-import room1 from "../assets/roomImages/room-1.png";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { RoomTypeContext } from "../context/RoomProvider";
@@ -10,8 +8,7 @@ import { useContext } from "react";
 const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   const navigate = useNavigate();
   const {handleClickRoom} = useContext(RoomTypeContext);
-  // Số lượng hình ảnh trong Carousel (minh họa 3 hình ảnh)
-  const imageCount = 3;
+
 
   // State để theo dõi trạng thái của trái tim
   const [isFavorite, setIsFavorite] = useState(false);
@@ -38,7 +35,7 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
         cursor: "pointer",
       }}
       className="room-card border m-4"
-      onClick={handleCardClick} // Thêm sự kiện click vào card
+       // Thêm sự kiện click vào card
     >
       {/* Carousel với biểu tượng trái tim */}
       <div style={{ position: "relative", overflow: "visible" }}>
@@ -66,6 +63,7 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
                 loading="lazy"
                 src={img.pathImg}
                 alt=""
+                onClick={handleCardClick}
               />
             </Carousel.Item>
           ))}
