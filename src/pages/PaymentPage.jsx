@@ -501,7 +501,23 @@ const PaymentPage = () => {
              
               </p>
             </div>
+
+            {/* Footer -  các button hoàn tất và xem lịch sử đặt phòng */}
             <div className="modal-footer">
+
+
+              <button
+                className="modal-button"
+                style={{marginRight  : '75px'}}
+                onClick={() => {
+                  setShowModal(false);
+                  navigate('/BookingHistory'); 
+                }}
+              >
+                Xem lịch sử đặt phòng <i className="fas fa-arrow-right"></i>
+              </button>
+
+              
               <button
                 className="modal-button"
                 onClick={() => {

@@ -49,6 +49,7 @@ const RoomDetail = () => {
   const { currentRoom, handleClickRoom } = useContext(RoomTypeContext);
   const [modalShow, setModalShow] = useState(false);
 
+
   // Define onHide function to close the modal
   const onHide = () => {
     setModalShow(false);
@@ -138,6 +139,8 @@ const RoomDetail = () => {
     updateBooking({ [name]: value });
   };
 
+
+
   // Xử lý submit form
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -147,10 +150,7 @@ const RoomDetail = () => {
     }
     if (!currentRoom) return;
 
-    if (!bookingData.checkInDate || !bookingData.checkOutDate) {
-      alert("Vui lòng chọn ngày nhận phòng và trả phòng.");
-      return;
-    }
+  
 
     const checkIn = new Date(bookingData.checkInDate);
     const checkOut = new Date(bookingData.checkOutDate);
@@ -474,8 +474,9 @@ const RoomDetail = () => {
                     <Col>
                       <Form.Group>
                         <Form.Label className="small fw-bold">
-                          NHẬN PHÒNG
+                          NHẬN PHÒNG <span className="text-danger">*</span> 
                         </Form.Label>
+                        
                         <Form.Control
                           type="date"
                           className="rounded-3"
@@ -494,7 +495,7 @@ const RoomDetail = () => {
                     <Col>
                       <Form.Group>
                         <Form.Label className="small fw-bold">
-                          TRẢ PHÒNG
+                          TRẢ PHÒNG <span className="text-danger">*</span> 
                         </Form.Label>
                         <Form.Control
                           type="date"
@@ -581,24 +582,7 @@ const RoomDetail = () => {
                   </div>
                 </div>
 
-                <div className="border-top pt-3">
-                  <div className="d-flex justify-content-between mb-2">
-                    <span>
-                      ${currentRoom.price} x {calculateNights()} đêm
-                    </span>
-                    <span>
-                      ${(parseFloat(currentRoom.price) * calculateNights()).toFixed(2)}
-                    </span>
-                  </div>
-                  <div className="d-flex justify-content-between mb-2">
-                    <span>Phí dịch vụ</span>
-                    <span>$10</span>
-                  </div>
-                  <div className="d-flex justify-content-between fw-bold mt-3 pt-3 border-top">
-                    <span>Tổng tiền</span>
-                    <span>${calculateTotalPrice().toFixed(2)}</span>
-                  </div>
-                </div>
+
               </Card.Body>
             </Card>
           </Col>

@@ -9,7 +9,7 @@ import { AuthContext } from "../context/AuthProvider";
 
 function BookingCard({ room }) {
   const navigate = useNavigate();
-  const { validateBooking, updateBooking } = useContext(BookingContext);
+  const { validateBooking, updateBooking,errors } = useContext(BookingContext);
   const {isVerify} = useContext(AuthContext);
   const { handleClickRoom } = useContext(RoomTypeContext);
   const [formData, setFormData] = useState({
@@ -20,6 +20,8 @@ function BookingCard({ room }) {
   });
   const [modalShow, setModalShow] = useState(false);
 
+
+
   useEffect(() => {
     updateBooking({
       checkInDate: '',
@@ -28,6 +30,8 @@ function BookingCard({ room }) {
       roomId: room?.roomID || null
     });
   }, [updateBooking, room]);
+
+  // Move state updates inside useEffect
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -46,9 +50,10 @@ function BookingCard({ room }) {
     if (!isVerify) {
       setModalShow(true); // Show the modal only
       return;
+    
     }
       handleClickRoom(room?.roomID);
-    navigate('/InputInfomation');
+   
     // Parse dữ liệu trước khi validate
     const dataToValidate = {
       ...formData,
@@ -67,6 +72,7 @@ function BookingCard({ room }) {
         ...dataToValidate,
         totalPrice
       });
+      navigate('/InputInfomation');
     }
   };
 
@@ -79,9 +85,6 @@ function BookingCard({ room }) {
   const onHide = () => {
     setModalShow(false);
   };
-
-
-
 
 
   return (
@@ -104,7 +107,7 @@ function BookingCard({ room }) {
             <Col>
               <Form.Group>
                 <Form.Label className="small fw-bold">
-                  NHẬN PHÒNG
+                  NHẬN PHÒNG <span className="text-danger">*</span>
                 </Form.Label>
                 <Form.Control 
                   type="date" 
@@ -114,12 +117,17 @@ function BookingCard({ room }) {
                   onChange={handleInputChange}
                   min={new Date().toISOString().split('T')[0]}
                 />
+                {errors.checkInDate && (
+                          <Form.Text className="text-danger">
+                            {errors.checkInDate}
+                          </Form.Text>
+                )}
               </Form.Group>
             </Col>
             <Col>
               <Form.Group>
                 <Form.Label className="small fw-bold">
-                  TRẢ PHÒNG
+                  TRẢ PHÒNG <span className="text-danger">*</span> 
                 </Form.Label>
                 <Form.Control 
                   type="date" 
@@ -129,6 +137,11 @@ function BookingCard({ room }) {
                   onChange={handleInputChange}
                   min={formData.checkInDate || new Date().toISOString().split('T')[0]}
                 />
+                 {errors.checkOutDate && (
+                          <Form.Text className="text-danger">
+                            {errors.checkOutDate}
+                          </Form.Text>
+                  )}
               </Form.Group>
             </Col>
           </Row>
