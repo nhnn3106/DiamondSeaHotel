@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { RoomTypeContext } from "../context/RoomProvider";
 
@@ -48,13 +48,17 @@ const LocationDropdown = ({ onSelect }) => {
 
   return (
     <div
-      className="bg-white border p-3 position-absolute end-0 shadow-sm"
+      className="bg-white border p-3 position-absolute shadow-sm location-dropdown-container"
       style={{
         top: "80px",
-        width: "max-content",
-        left: "-12%",
+        width: "750px", // Increased fixed width to prevent shrinking
+        left: "50%", 
+        transform: "translateX(-50%)", // Center the dropdown
         borderRadius: "16px",
         zIndex: 1001, // Ensures it's above FilterBar
+        overflow: "visible", // Allow content to overflow
+        maxHeight: "500px", // Limit maximum height
+        overflowY: "auto" // Add scrolling if needed
       }}
     >
       <div className="fw-bold mb-3 ms-2 border-bottom pb-2">Tìm kiếm theo khu vực</div>

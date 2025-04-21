@@ -205,7 +205,7 @@ app.get('/order/:accountID', async (req, res) => {
         const rows = await executeQuery(`
             SELECT 
                 o.orderID, o.price, o.roomID, o.orderDate, o.checkInDate, o.checkOutDate, 
-                o.accountID, o.name, o.sdt, o.email, o.type, o.attribute,
+                o.accountID, o.name, o.sdt, o.email, o.type, o.attribute, o.status,
                 r.name AS roomName, r.price AS roomPrice, r.dienTich, r.soNguoi, r.bedType, r.bedCount, 
                 r.roomTypeID, r.danhGia, r.moTa, r.location,
                 rt.name AS roomTypeName, rt.pathImg AS roomTypeImg,
@@ -234,7 +234,7 @@ app.get('/order/:accountID', async (req, res) => {
         const ordersMap = new Map();
         for (const row of rows) {
             const {
-                orderID, price, roomID, orderDate, checkInDate, checkOutDate, accountID, name, sdt, email, type, attribute,
+                orderID, price, roomID, orderDate, checkInDate, checkOutDate, accountID, name, sdt, email, type, attribute, status,
                 roomName, roomPrice, dienTich, soNguoi, bedType, bedCount, roomTypeID, danhGia, moTa, location,
                 roomTypeName, roomTypeImg, imageID, roomImage, serviceID, serviceName, serviceImg, amenityID, amenityName, amenityImg
             } = row;
@@ -253,6 +253,7 @@ app.get('/order/:accountID', async (req, res) => {
                     email,
                     type,
                     attribute,
+                    status: status || 'upcoming', // Default to upcoming if status is null
                     room: {
                         roomID,
                         name: roomName,
@@ -305,8 +306,8 @@ app.post('/order', async (req, res) => {
         await executeQuery(`
             INSERT INTO Orders (
                 orderID, accountID, roomID, price, orderDate,
-                checkInDate, checkOutDate, name, email, sdt, type
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                checkInDate, checkOutDate, name, email, sdt, type, status
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'upcoming')
         `, [orderID, accountID, roomID, price, orderDate, checkInDate, checkOutDate, name, email, sdt, type]);
 
         res.status(201).json({
@@ -352,7 +353,8 @@ app.delete('/order/:orderID', async (req, res) => {
         }
 
         await executeQuery(`
-            DELETE FROM Orders 
+            UPDATE Orders 
+            SET status = 'canceled', attribute = 'Đã hủy'
             WHERE orderID = ?
         `, [orderID]);
 

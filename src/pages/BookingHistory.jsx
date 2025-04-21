@@ -3,6 +3,7 @@ import "../Css/BookingHistory.css";
 import { AuthContext } from "../context/AuthProvider";
 import CancelBookingModal from "../components/CancelBookingModal";
 import { formatCurrency } from "../utils/formatters";
+import { Modal, Button } from "react-bootstrap";
 
 const BookingHistory = () => {
   const { user } = useContext(AuthContext);
@@ -12,14 +13,14 @@ const BookingHistory = () => {
   const [showMessageAccept, setShowMessageAccept] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
+  const [showError, setShowError] = useState(false);
 
   const [dateFilter, setDateFilter] = useState({
     startDate: "",
     endDate: "",
   });
   const [filteredBookings, setFilteredBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
 
   // Ngày hiện tại (2025-04-15)
   const currentDate = new Date("2025-04-15");
@@ -30,22 +31,17 @@ const BookingHistory = () => {
       if (!user?.accountID) return;
 
       try {
-        setLoading(true);
+      
         const response = await fetch(`http://localhost:3000/order/${user.accountID}`);
         const data = await response.json();
 
         if (data.success) {
           setBookings(data.data);
           setFilteredBookings(data.data);
-        } else {
-          setError(data.message);
-        }
+        } 
       } catch (err) {
-        setError("Có lỗi xảy ra khi tải dữ liệu đơn đặt phòng");
         console.error("Error fetching orders:", err);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
 
     fetchOrders();
@@ -61,9 +57,10 @@ const BookingHistory = () => {
   };
 
   // Hàm kiểm tra xem có thể hủy phòng không
-  const canCancelBooking = (checkInDate) => {
-    const checkIn = new Date(checkInDate);
-    return checkIn > currentDate;
+  const canCancelBooking = (booking) => {
+    const checkIn = new Date(booking.checkInDate);
+    // Don't allow cancellation of already canceled bookings
+    return checkIn > currentDate && booking.status !== 'canceled';
   };
 
   // Mở modal xác nhận hủy đặt phòng
@@ -83,7 +80,12 @@ const BookingHistory = () => {
       const data = await response.json();
 
       if (data.success) {
-        const updatedBookings = bookings.filter((booking) => booking.orderID !== selectedBooking.orderID);
+        // Update the booking status in the UI instead of removing it
+        const updatedBookings = bookings.map((booking) => 
+          booking.orderID === selectedBooking.orderID 
+            ? { ...booking, status: 'canceled', attribute: 'Đã hủy' } 
+            : booking
+        );
         setBookings(updatedBookings);
         applyFilters(updatedBookings, activeFilter, dateFilter);
         setShowMessageAccept(true);
@@ -93,10 +95,12 @@ const BookingHistory = () => {
           setShowMessageAccept(false);
         }, 3000);
       } else {
-        alert(data.message || "Có lỗi xảy ra khi hủy đặt phòng");
+        //sét hiển thị không thể hủy vì quá ngày cho phép hủy
+        setShowError(true);
       }
-    } catch (err) {
-      console.error("Error canceling booking:", err);
+    } catch {
+      // Simplified error handling without using a variable
+      console.error("Error canceling booking");
       alert("Có lỗi xảy ra khi hủy đặt phòng");
     } finally {
       setShowCancelModal(false);
@@ -130,12 +134,23 @@ const BookingHistory = () => {
   const applyFilters = (data, filterType, dateRange) => {
     let result = [...data];
 
-    // Lọc theo loại (sắp đến/đã hoàn thành)
+    // Lọc theo loại (sắp đến/đã hoàn thành/đã hủy)
     if (filterType !== "all") {
       if (filterType === "upcoming") {
-        result = result.filter(booking => new Date(booking.checkInDate) >= currentDate);
+        // Chỉ hiển thị đơn sắp đến (status là upcoming hoặc không có status) và ngày nhận phòng trong tương lai
+        result = result.filter(booking => 
+          (booking.status === 'upcoming' || !booking.status) && 
+          new Date(booking.checkInDate) >= currentDate
+        );
       } else if (filterType === "completed") {
-        result = result.filter(booking => new Date(booking.checkOutDate) < currentDate);
+        // Chỉ hiển thị đơn đã hoàn thành (status là completed hoặc ngày trả phòng đã qua)
+        result = result.filter(booking => 
+          booking.status === 'completed' || 
+          (booking.status !== 'canceled' && new Date(booking.checkOutDate) < currentDate)
+        );
+      } else if (filterType === "canceled") {
+        // Chỉ hiển thị đơn đã hủy (status là canceled)
+        result = result.filter(booking => booking.status === 'canceled');
       }
     }
 
@@ -190,16 +205,7 @@ const BookingHistory = () => {
     ));
   };
 
-  if (loading) {
-    return (
-      <div className="booking-history-wrapper">
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Đang tải dữ liệu...</p>
-        </div>
-      </div>
-    );
-  }
+
 
   return (
     <div className="booking-history-wrapper">
@@ -240,6 +246,12 @@ const BookingHistory = () => {
               onClick={() => handleFilterChange("completed")}
             >
               Đã hoàn thành
+            </button>
+            <button 
+              className={`filter-tab ${activeFilter === "canceled" ? "active" : ""}`}
+              onClick={() => handleFilterChange("canceled")}
+            >
+              Đã hủy
             </button>
           </div>
 
@@ -286,11 +298,11 @@ const BookingHistory = () => {
             filteredBookings.map((booking) => {
               const soNgay = tinhSoNgay(booking.checkInDate, booking.checkOutDate);
               const isExpanded = expanded[booking.orderID] || false;
-              const canCancel = canCancelBooking(booking.checkInDate);
+              const canCancel = canCancelBooking(booking);
               const isCompleted = new Date(booking.checkInDate) < currentDate;
 
               return (
-                <div key={booking.orderID} className={`booking-card ${isCompleted ? "completed" : "upcoming"}`}>
+                <div key={booking.orderID} className={`booking-card ${booking.status === 'canceled' ? "canceled" : (isCompleted ? "completed" : "upcoming")}`}>
                   <div className="booking-card-header">
                     <div className="booking-card-image">
                       <img
@@ -298,8 +310,13 @@ const BookingHistory = () => {
                         src={booking.room.images[0] || "https://via.placeholder.com/220x120"}
                         alt={booking.room.name}
                       />
-                      {isCompleted && <div className="status-badge completed">Đã hoàn thành</div>}
-                      {!isCompleted && <div className="status-badge upcoming">Sắp đến</div>}
+                      {booking.status === 'canceled' ? (
+                        <div className="status-badge canceled">Đã hủy</div>
+                      ) : isCompleted ? (
+                        <div className="status-badge completed">Đã hoàn thành</div>
+                      ) : (
+                        <div className="status-badge upcoming">Sắp đến</div>
+                      )}
                     </div>
                     <div className="booking-card-info">
                       <h3 className="booking-title">
@@ -321,7 +338,7 @@ const BookingHistory = () => {
                       </p>
                     </div>
                     <div className="booking-actions">
-                      {canCancel && (
+                      {canCancel && booking.status !== 'canceled' && (
                         <button
                           className="cancel-btn"
                           onClick={() => openCancelModal(booking)}
@@ -339,6 +356,25 @@ const BookingHistory = () => {
                       </button>
                     </div>
                   </div>
+
+
+                  {showError && (
+                    <Modal show={showError} onHide={() => setShowError(false)}>
+                      <Modal.Header closeButton >
+                        <Modal.Title className="text-white">Thông báo</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <p className="fw-bold">Không thể hủy đặt phòng vì quá ngày cho phép hủy</p>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShowError(false)}>
+                          Đóng
+                        </Button>
+                      </Modal.Footer>
+                      
+                    </Modal>
+                  )}
+                  
 
                   {isExpanded && (
                     <div className="booking-card-details">
@@ -442,7 +478,12 @@ const BookingHistory = () => {
         onConfirm={handleCancelBooking}
         booking={selectedBooking}
       />
+
+      
+
+
     </div>
+    
   );
 };
 

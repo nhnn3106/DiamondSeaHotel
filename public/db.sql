@@ -50,6 +50,7 @@ CREATE TABLE Orders (
     email NVARCHAR(100),
     type NVARCHAR(100),
     attribute NVARCHAR(255),
+    status ENUM('upcoming', 'completed', 'canceled') NOT NULL,
     FOREIGN KEY (roomID) REFERENCES Rooms(roomID),
     FOREIGN KEY (accountID) REFERENCES Accounts(accountID)
 );
@@ -258,16 +259,41 @@ INSERT INTO Room_Amenity (roomID, amenityID) VALUES
 (19, 1), (19, 2), (19, 3), (19, 4), (19, 5),
 (20, 1), (20, 2), (20, 3), (20, 4);
 
+-- Create a stored procedure to update order statuses
+DELIMITER //
+CREATE PROCEDURE update_orders_status()
+BEGIN
+  -- Update completed orders
+  UPDATE Orders 
+  SET status = 'completed'
+  WHERE checkOutDate < CURRENT_DATE() AND status != 'canceled';
+  
+  -- Update upcoming orders (active and future)
+  UPDATE Orders 
+  SET status = 'upcoming'
+  WHERE checkOutDate >= CURRENT_DATE() AND status != 'canceled';
+END//
+DELIMITER ;
 
-INSERT INTO Orders (orderID, price, roomID, orderDate, checkInDate, checkOutDate, accountID, name, sdt, email, type, attribute) VALUES
+-- You can call this procedure when needed with: CALL update_orders_status();
+-- For testing, let's call it once to update the initial status
+CALL update_orders_status();
+
+-- Insert Orders with status field
+INSERT INTO Orders (orderID, price, roomID, orderDate, checkInDate, checkOutDate, accountID, name, sdt, email, type, attribute, status) VALUES
 -- User 1 - Đơn 1: Phòng 1 (800000/đêm) - 3 đêm = 2400000
-(1, 2400000, 1, '2024-01-10', '2024-01-15', '2024-01-18', 1, 'user1', '0958385334', 'user1@example.com', 'Thanh toán trực tuyến', 'Đã thanh toán'),
+(1, 2400000, 1, '2024-01-10', '2024-01-15', '2024-01-18', 1, 'user1', '0958385334', 'user1@example.com', 'Thanh toán trực tuyến', 'Đã thanh toán', 'completed'),
 -- User 1 - Đơn 2: Phòng 5 (670000/đêm) - 4 đêm = 2680000
-(2, 2680000, 5, '2024-02-01', '2024-02-15', '2024-02-19', 1, 'user1', '0958385334', 'user1@example.com', 'Chuyển khoản ngân hàng', 'Đã thanh toán'),
+(2, 2680000, 5, '2024-02-01', '2024-02-15', '2024-02-19', 1, 'user1', '0958385334', 'user1@example.com', 'Chuyển khoản ngân hàng', 'Đã thanh toán', 'completed'),
 -- User 2 - Đơn 1: Phòng 3 (930000/đêm) - 3 đêm = 2790000
-(3, 2790000, 3, '2024-03-10', '2024-03-15', '2024-03-18', 2, 'user2', '0987654321', 'user2@example.com', 'Thanh toán tại khách sạn', 'Đã thanh toán'),
+(3, 2790000, 3, '2024-03-10', '2024-03-15', '2024-03-18', 2, 'user2', '0987654321', 'user2@example.com', 'Thanh toán tại khách sạn', 'Đã thanh toán', 'completed'),
 -- User 2 - Đơn 2: Phòng 19 (850000/đêm) - 4 đêm = 3400000
-(4, 3400000, 19, '2024-04-05', '2024-04-10', '2024-04-14', 2, 'user2', '0987654321', 'user2@example.com', 'Thanh toán trực tuyến', 'Đã thanh toán');
+(4, 3400000, 19, '2024-04-05', '2024-04-10', '2024-04-14', 2, 'user2', '0987654321', 'user2@example.com', 'Thanh toán trực tuyến', 'Đã thanh toán', 'completed'),
+-- Add some upcoming bookings
+(5, 1600000, 2, '2024-07-01', '2024-12-10', '2024-12-12', 1, 'user1', '0958385334', 'user1@example.com', 'Thanh toán trực tuyến', 'Đã thanh toán', 'upcoming'),
+(6, 1860000, 3, '2024-07-05', '2024-12-20', '2024-12-22', 2, 'user2', '0987654321', 'user2@example.com', 'Thanh toán trực tuyến', 'Đã thanh toán', 'upcoming'),
+-- Add a canceled booking
+(7, 1340000, 5, '2024-06-15', '2024-07-10', '2024-07-12', 1, 'user1', '0958385334', 'user1@example.com', 'Thanh toán trực tuyến', 'Đã hủy', 'canceled');
 
 UPDATE Rooms
 SET location = CASE
