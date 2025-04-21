@@ -10,6 +10,7 @@ import NavigateProvider from "./context/NavigateProvider";
 import HotelHot from "./pages/HotelHot";
 import MainLayout from "./layouts/MainLayout";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import {AuthProvider} from "./context/AuthProvider";
 import Profile from "./pages/Profile";
@@ -45,6 +46,7 @@ function App() {
                   <Route path="/InputInfomation" element={<Input_Information />} />
                   <Route path="/PaymentPage" element={<PaymentPage />} />
                   <Route path="/BookingHistory" element={<BookingHistory />} />
+                  <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>
             </BrowserRouter>
