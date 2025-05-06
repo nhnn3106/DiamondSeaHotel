@@ -9,7 +9,7 @@ import { formatCurrency } from "../utils/formatters";
 
 const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   const navigate = useNavigate();
-  const {handleClickRoom} = useContext(RoomTypeContext);
+  const { handleClickRoom } = useContext(RoomTypeContext);
 
   // State để theo dõi trạng thái của trái tim
   const [isFavorite, setIsFavorite] = useState(false);
@@ -17,7 +17,7 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   // Hàm xử lý khi ấn vào trái tim
   const handleFavoriteClick = (e) => {
     e.stopPropagation(); // Ngăn sự kiện click lan ra card
-    
+
     setIsFavorite(!isFavorite);
   };
 
@@ -29,14 +29,13 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
   return (
     <Card
       id={id}
-      
       style={{
         width: "18rem",
         height: "380px",
         borderRadius: "12px",
         overflow: "hidden",
         cursor: "pointer",
-        margin: "0 auto 20px auto"
+        margin: "0 auto 20px auto",
       }}
       className="room-card border shadow-sm"
     >
@@ -50,9 +49,7 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
           style={{ borderRadius: "12px 12px 0 0" }}
         >
           {images.map((img) => (
-            <Carousel.Item
-              key={img.imageID}
-            >
+            <Carousel.Item key={img.imageID}>
               <img
                 style={{
                   width: "100%",
@@ -69,34 +66,29 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
             </Carousel.Item>
           ))}
         </Carousel>
-
-        <CustomHeart
-          isFavourite={isFavorite}
-          handleFavoriteClick={handleFavoriteClick}
-        />
       </div>
 
       {/* Nội dung thẻ */}
-      <Card.Body 
-        className="p-3" 
-        style={{ 
+      <Card.Body
+        className="p-3"
+        style={{
           flex: 1,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
         }}
       >
         <div>
-          <Card.Title 
-            style={{ 
-              fontSize: "16px", 
+          <Card.Title
+            style={{
+              fontSize: "16px",
               fontWeight: "bold",
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
-              marginBottom: "8px"
+              marginBottom: "8px",
             }}
           >
             {location}
@@ -105,7 +97,9 @@ const RoomCard = ({ id, price, bedType, bedCount, location, images }) => {
             {`${bedCount} giường ${bedType}`}
           </Card.Text>
         </div>
-        <Card.Text style={{ fontSize: "14px", fontWeight: "bold", marginBottom: 0 }}>
+        <Card.Text
+          style={{ fontSize: "14px", fontWeight: "bold", marginBottom: 0 }}
+        >
           {formatCurrency(price)}
         </Card.Text>
       </Card.Body>
@@ -120,7 +114,7 @@ RoomCard.propTypes = {
   bedType: PropTypes.string.isRequired,
   bedCount: PropTypes.number.isRequired,
   location: PropTypes.string.isRequired,
-  images: PropTypes.array.isRequired
+  images: PropTypes.array.isRequired,
 };
 
 export default RoomCard;
@@ -163,9 +157,9 @@ const CustomHeart = ({ isFavourite, handleFavoriteClick }) => {
 
 CustomHeart.propTypes = {
   isFavourite: PropTypes.bool,
-  handleFavoriteClick: PropTypes.func.isRequired
+  handleFavoriteClick: PropTypes.func.isRequired,
 };
 
 CustomHeart.defaultProps = {
-  isFavourite: false
+  isFavourite: false,
 };
